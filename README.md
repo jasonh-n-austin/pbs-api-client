@@ -80,6 +80,7 @@ The section assumes a dependency on Guava for injection to construct book lists.
 
 It should be noted that the BookListBuilder will process single book responses (e.g. RequestType=ISBNList when only one ISBN is provided) or a list of books. 
 May not work properly with Requests at this point. 
+Not every field is guaranteed to be deseralized (feel free to PR more).
 
 ### Turn response text/json into a list of books
 ```
