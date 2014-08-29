@@ -1,0 +1,8 @@
+{
+    "Response": {
+        "APIVersion": "1.0",
+        "RequestType": "MemberWishList",
+        "ResponseID": "M1dIWEN6VGd4Snc9",
+        "error": "The request parameter 'MemberID' is required for this RequestType."
+    }
+}

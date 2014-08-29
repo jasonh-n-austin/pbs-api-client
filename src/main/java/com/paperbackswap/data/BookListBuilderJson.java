@@ -106,7 +106,8 @@ public class BookListBuilderJson implements BookListBuilder {
         JSONObject books = getBooksObject(responseObject);
         Object book = books.opt("Book");
         if (!(book instanceof JSONArray)) {
-            throw new InvalidBooksResponseException("Book list was invalid");
+            // OK to be null here, this is partly testing for the existence of items
+            return null;
         }
         return books.optJSONArray("Book");
     }

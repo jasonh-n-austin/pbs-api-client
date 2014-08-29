@@ -24,12 +24,22 @@ import static org.junit.Assert.assertNotNull;
 public class BookListBuilderTests {
     private BookListBuilder bookListBuilder;
     private JSONObject testBooks;
+    private JSONObject testBook;
+    private JSONObject testBadResponse;
 
     @Before
     public void setup() throws IOException {
         final String testBooksFile = "test_books.json";
         testBooks = TestDataLoader.loadTestFileToJson(testBooksFile);
         assertNotNull(testBooks);
+
+        final String testBookFile = "test_single_book.json";
+        testBook = TestDataLoader.loadTestFileToJson(testBookFile);
+        assertNotNull(testBook);
+
+        final String testBadResponseFile = "test_book_error.json";
+        testBadResponse = TestDataLoader.loadTestFileToJson(testBadResponseFile);
+        assertNotNull(testBadResponse);
 
     }
 
@@ -46,9 +56,21 @@ public class BookListBuilderTests {
         assertNotNull(bookList.get(0));
     }
 
-    @Test(expected = InvalidBooksResponseException.class)
-    public void exception_on_bad_response() throws InvalidBookException, BookListBuilderException, InvalidBooksResponseException, BooksResponseHasErrorsException {
-        BookList bookList = bookListBuilder.construct(new JSONObject("{}"));
+    @Test
+    public void builds_single_as_list() throws InvalidBookException, BookListBuilderException, InvalidBooksResponseException, BooksResponseHasErrorsException {
+        BookList bookList = bookListBuilder.construct(testBook);
+        assertNotNull(bookList);
+        assertEquals(bookList.size(), 1);
+        assertNotNull(bookList.get(0));
     }
 
+    @Test(expected = InvalidBooksResponseException.class)
+    public void exception_on_bad_response() throws InvalidBookException, BookListBuilderException, InvalidBooksResponseException, BooksResponseHasErrorsException {
+        bookListBuilder.construct(new JSONObject("{}"));
+    }
+
+    @Test(expected = BooksResponseHasErrorsException.class)
+    public void response_has_error() throws InvalidBookException, InvalidBooksResponseException, BooksResponseHasErrorsException, BookListBuilderException {
+        bookListBuilder.construct(testBadResponse);
+    }
 }

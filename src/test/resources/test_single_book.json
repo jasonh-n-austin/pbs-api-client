@@ -1,0 +1,39 @@
+{
+    "Response": {
+        "APIVersion": "1.0",
+        "RequestType": "ISBNList",
+        "ResponseID": "VVNEWGZQbmdUWWs9",
+        "Limit": "10",
+        "Offset": "0",
+        "GrandTotalResults": "1",
+        "ResultsThisResponse": "1",
+        "Books": {
+            "Book": {
+                "ISBN-13": "9780471712275",
+                "ISBN-10": "0471712272",
+                "BookDetailsLink": "http://www.paperbackswap.com/Introduction-Programming-Object-Oriented-Design/book/0471712272/&_ads=widget&m=referral&c=API&k=",
+                "Title": "An Introduction to Programming and Object-Oriented Design Using Java 2nd Edition - Java 5.0 version",
+                "Authors": {
+                    "Author": [
+                        "Jaime Nino",
+                        "Frederick A. Hosch"
+                    ]
+                },
+                "CoverImages": {
+                    "SmallImage": "http://cc.pbsstatic.com/s/75/2275/9780471712275.jpg",
+                    "MediumImage": "http://cc.pbsstatic.com/m/75/2275/9780471712275.jpg",
+                    "LargeImage": "http://a.pbsstatic.com/images/no_cover/no_cover_322_475.png"
+                },
+                "Binding": "Paperback",
+                "Rating": "0.0",
+                "Available": "false",
+                "NumberOfPages": "976",
+                "PublicationDate": "2004-10-28",
+                "Publisher": "John Wiley  Sons",
+                "Description": "Nino and Hosch have updated their popular introductory text that provides an objects first introduction to programming and software design using Java. The emphasis throughout is on problem modeling using fundamental software engineering princi-ples and concepts. Java used as a vehicle for teaching these topics. New constructs and features of Java 5.0, such as generics, are introduced. The text includes optional, interactive exercises using the DrJava integrated development environment (IDE). The UML is employed (very informally) for denoting objects, object relationships, and system dynamics. No specific previous programming experience is assumed, and the text is appropriate for first year computer science majors. The text could also carry over to a second course on data structures or software/OO design.<br>    <br>    About DrJava: DrJava is an IDE designed primarily for students and includes an easy to use facility for interactively evaluating Java code. Optional DrJava exercises are included throughout the text if instructors want their students doing more pro-gramming. DrJava is the IDE chosen by the authors, but any IDE can be used for these exercises.<br>    <br>    This update of the text provides Java code in newly released Version 5.0.",
+                "BuyItNew": "http://www.amazon.com/gp/product/0471712272?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0471712272"
+            }
+        },
+        "ResponseTime": "0.011162996292114"
+    }
+}
