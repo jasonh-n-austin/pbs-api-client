@@ -4,10 +4,14 @@ pbs-api-client
 API client/SDK for Paperbackswap.com
 
 Built as a standalone Java library, usable in Android.
-Builds with Gradle
-Uses fluent syntax wherever possible
 
-## Common Usage
+Builds with Gradle.
+
+Uses fluent syntax wherever possible (perhaps at a slight loss of efficiency as mikaelhg's UrlBuilder is final)
+
+# Common Usage
+
+## Build URLs
 
 ### Do the OAuth 1.0a dance
 ```java
@@ -71,7 +75,28 @@ PbsUrlInfo.ADD_TO_WISH_LIST.toBuilder()
     .toString();
 ```
 
-## Thanks
-Acknowledgements to a few great Java libraries that made this much tidier
+## Deserialize responses
+The section assumes a dependency on Guava for injection to construct book lists.
+
+It should be noted that the BookListBuilder will process single book responses (e.g. RequestType=ISBNList when only one ISBN is provided) or a list of books. 
+May not work properly with Requests at this point. 
+
+### Turn response text/json into a list of books
+```
+@Inject
+public void processResponse(BookListBuilder bookListBuilder) {
+    // Go fetch response with your favorite HTTP client stack => response
+    BookList bookList = bookListBuilder.construct(response));
+    for (Book book : bookList) {
+        System.out.println(book.getTitle);
+    }
+}
+
+```
+
+
+## Acknowledgements
+Thanks to a few great Java libraries that made this much tidier
 * [Signpost by mttkay](https://github.com/mttkay/signpost)
 * [Urlbuilder by mikaelhg](https://github.com/mikaelhg/urlbuilder)
+* [Guava by Google](https://code.google.com/p/guava-libraries/)
