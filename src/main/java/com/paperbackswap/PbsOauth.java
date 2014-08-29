@@ -12,10 +12,6 @@ import oauth.signpost.exception.OAuthNotAuthorizedException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
-import java.io.UnsupportedEncodingException;
-import java.util.List;
-import java.util.Map;
-
 
 public class PbsOauth {
     private boolean isAuthorizing;

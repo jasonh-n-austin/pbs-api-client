@@ -2,8 +2,6 @@ package com.paperbackswap;
 
 import gumi.builders.UrlBuilder;
 
-import java.lang.ref.SoftReference;
-
 /**
  * List of supported paths in the paperbackswap.com API
 */
