@@ -55,13 +55,13 @@ public class BookListBuilderJson implements BookListBuilder {
 	}
 
     /**
-     * Expects "Response" object from API response object
      * Builds a list of all books, or a list with one book if a single is present
-     * @param responseObject
-     * @return
+     * @param responseObject Expects "Response" object from API response object
+     * @return List of Book objects
      * @throws InvalidBooksResponseException
      * @throws BookListBuilderException
      * @throws InvalidBookException
+     * @see com.paperbackswap.data.Book
      */
     protected List<Book> getListOrSingle(JSONObject responseObject) throws InvalidBooksResponseException, BookListBuilderException, InvalidBookException {
         List<Book> bookList = new ArrayList<Book>();
@@ -95,42 +95,38 @@ public class BookListBuilderJson implements BookListBuilder {
 
 
     /**
-     * Expects "Response" object from API response object
      * Builds a list of books from response/books
-     * @param responseObject
-     * @return
+     * @param responseObject Expects "Response" object from API response object
+     * @return The JSON array full of books. Could be null if this is a single book response.
      * @throws BookListBuilderException
      * @throws InvalidBooksResponseException
      */
     protected JSONArray getBooksArray(JSONObject responseObject)
             throws BookListBuilderException, InvalidBooksResponseException {
-        JSONArray bookArr = null;
         JSONObject books = getBooksObject(responseObject);
         Object book = books.opt("Book");
         if (!(book instanceof JSONArray)) {
             throw new InvalidBooksResponseException("Book list was invalid");
         }
-        bookArr = books.optJSONArray("Book");
-        return bookArr;
+        return books.optJSONArray("Book");
     }
 
     /**
-     * Expects "Response" object from API response object
-     * @param response
-     * @return
+     *
+     * @param responseObject Expects "Response" object from API response object
+     * @return The "Books" node in the response object
      * @throws BookListBuilderException
      * @throws InvalidBooksResponseException
      */
-    protected JSONObject getBooksObject(JSONObject response)
+    protected JSONObject getBooksObject(JSONObject responseObject)
             throws BookListBuilderException, InvalidBooksResponseException {
-        return response.optJSONObject("Books");
+        return responseObject.optJSONObject("Books");
     }
 
     /**
-     * Expects "Response" object from API response object
      * Retrieves single book from response if no list was provided
-     * @param responseObject
-     * @return
+     * @param responseObject Expects "Response" object from API response object
+     * @return The "Book" node in the response object
      * @throws BookListBuilderException
      * @throws InvalidBooksResponseException
      */
@@ -140,13 +136,13 @@ public class BookListBuilderJson implements BookListBuilder {
 	}
 
     /**
-     * Expects "Response" object from API response object
      * Retrieves URL for next list of results in paged set, if it exists
-     * @param responseObject
-     * @return
+     * @param responseObject Expects "Response" object from API response object
+     * @return URL for next list of results
      * @throws BookListBuilderException
      * @throws InvalidBooksResponseException
      * @throws BooksResponseHasErrorsException
+     * @see com.paperbackswap.Url.PbsUrlBuilder
      */
 	protected PbsUrlBuilder getNextPage(JSONObject responseObject) throws BookListBuilderException, InvalidBooksResponseException, BooksResponseHasErrorsException {
 		PbsUrlBuilder next = null;
