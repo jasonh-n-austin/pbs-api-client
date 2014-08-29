@@ -9,6 +9,34 @@ Uses fluent syntax wherever possible
 
 ## Common Usage
 
+### Do the OAuth 1.0a dance
+```java
+PbsOauth oauth = PbsOauth("key", "secret");
+String requestTokenUrl = oauth.getRequestTokenUrl("http://localhost:8080/capture_verifier")
+System.out.println(oauth.isAuthorizing()); // "true"
+
+// Go do things in the browser with requestTokenUrl, capture verifier from callback
+
+oauth.retrieveAccessToken(verifier)
+System.out.println(oauth.isAuthorizing()); // "false"
+
+String signedUrl = oauth.signRequest(
+    PbsUrlBuilder builder = PbsUrlBuilder
+        .fromPath(PbsUrlInfo.MEMBER_WISH_LIST)
+        .toString();
+        );
+```
+
+### Sign the request with saved token/secret
+```java
+PbsOauth oauth = PbsOauth("key", "secret", "token", "tokensecret");
+String signedUrl = oauth.signRequest(
+    PbsUrlBuilder builder = PbsUrlBuilder
+        .fromPath(PbsUrlInfo.MEMBER_WISH_LIST)
+        .toString();
+        );
+```
+
 ### Build a URL from the know list
 ```java
 PbsUrlBuilder builder = PbsUrlBuilder
