@@ -1,19 +1,3 @@
-**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
-
-- [pbs-api-client](#user-content-pbs-api-client)
-- [Common Usage](#user-content-common-usage)
-	- [Build URLs](#user-content-build-urls)
-		- [Do the OAuth 1.0a dance](#user-content-do-the-oauth-10a-dance)
-		- [Sign the request with saved token/secret](#user-content-sign-the-request-with-saved-tokensecret)
-		- [Build a URL from the know list](#user-content-build-a-url-from-the-know-list)
-		- [Build a URL from a string](#user-content-build-a-url-from-a-string)
-		- [Explicitly set a page](#user-content-explicitly-set-a-page)
-		- [Set an isbn in the URL](#user-content-set-an-isbn-in-the-url)
-	- [Deserialize responses](#user-content-deserialize-responses)
-		- [Turn response text/json into a list of books](#user-content-turn-response-textjson-into-a-list-of-books)
-	- [Acknowledgements](#user-content-acknowledgements)
-	
-
 pbs-api-client v1.1
 ==============
 
@@ -24,6 +8,21 @@ Built as a standalone Java library, usable in Android.
 Builds with Gradle.
 
 Uses fluent syntax wherever possible (perhaps at a slight loss of efficiency as mikaelhg's UrlBuilder is final)
+
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+
+- [Common Usage](#user-content-common-usage)
+	- [Build URLs](#user-content-build-urls)
+		- [Do the OAuth 1.0a dance](#user-content-do-the-oauth-10a-dance)
+		- [Sign the request with saved token/secret](#user-content-sign-the-request-with-saved-tokensecret)
+		- [Build a URL from the know list](#user-content-build-a-url-from-the-know-list)
+		- [Build a URL from a string](#user-content-build-a-url-from-a-string)
+		- [Explicitly set a page](#user-content-explicitly-set-a-page)
+		- [Set an isbn in the URL](#user-content-set-an-isbn-in-the-url)
+	- [Deserialize responses](#user-content-deserialize-responses)
+		- [Turn response text/json into a list of books](#user-content-turn-response-textjson-into-a-list-of-books)
+- [Acknowledgements](#user-content-acknowledgements)
+	
 
 # Common Usage
 
@@ -112,7 +111,7 @@ public void processResponse(BookListBuilder bookListBuilder) {
 ```
 
 
-## Acknowledgements
+# Acknowledgements
 Thanks to a few great Java libraries that made this much tidier
 * [Signpost by mttkay](https://github.com/mttkay/signpost)
 * [Urlbuilder by mikaelhg](https://github.com/mikaelhg/urlbuilder)
