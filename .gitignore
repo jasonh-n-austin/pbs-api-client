@@ -1,9 +1,7 @@
-/bin
-/gen
-/.DS_Store
-/build
-/out
-/gradlew
-/gradlew.bat
-/gradle
-/.idea
+.DS_Store
+build
+out
+.idea
+gradlew
+gradlew.bat
+gradle
