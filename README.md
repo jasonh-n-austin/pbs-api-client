@@ -1,4 +1,20 @@
-pbs-api-client
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+
+- [pbs-api-client](#user-content-pbs-api-client)
+- [Common Usage](#user-content-common-usage)
+	- [Build URLs](#user-content-build-urls)
+		- [Do the OAuth 1.0a dance](#user-content-do-the-oauth-10a-dance)
+		- [Sign the request with saved token/secret](#user-content-sign-the-request-with-saved-tokensecret)
+		- [Build a URL from the know list](#user-content-build-a-url-from-the-know-list)
+		- [Build a URL from a string](#user-content-build-a-url-from-a-string)
+		- [Explicitly set a page](#user-content-explicitly-set-a-page)
+		- [Set an isbn in the URL](#user-content-set-an-isbn-in-the-url)
+	- [Deserialize responses](#user-content-deserialize-responses)
+		- [Turn response text/json into a list of books](#user-content-turn-response-textjson-into-a-list-of-books)
+	- [Acknowledgements](#user-content-acknowledgements)
+	
+
+pbs-api-client v1.1
 ==============
 
 API client/SDK for Paperbackswap.com
