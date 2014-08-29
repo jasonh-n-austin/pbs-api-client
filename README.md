@@ -39,6 +39,10 @@ String signedUrl = oauth.signRequest(
 
 ### Build a URL from the know list
 ```java
+PbsUrlInfo.MEMBER_WISH_LIST.toString();
+PbsUrlInfo.MEMBER_WISH_LIST.toUri();
+PbsUrlInfo.MEMBER_WISH_LIST.toBuilder();
+
 PbsUrlBuilder builder = PbsUrlBuilder
     .fromPath(PbsUrlInfo.MEMBER_WISH_LIST)
     .toString();
@@ -55,16 +59,14 @@ PbsUrlBuilder builder = PbsUrlBuilder
 
 ### Explicitly set a page
 ```java
-PbsUrlBuilder builder = PbsUrlBuilder
-    .fromPath(PbsUrlInfo.MEMBER_WISH_LIST)
+PbsUrlInfo.MEMBER_WISH_LIST.toBuilder()
     .withOffsetLimit(10, 10)
     .toString();
 ```
 
 ### Set an isbn in the URL
 ```java
-PbsUrlBuilder builder = PbsUrlBuilder
-    .fromPath(PbsUrlInfo.ADD_TO_WISH_LIST)
+PbsUrlInfo.ADD_TO_WISH_LIST.toBuilder()
     .withIsbn(0312851820)
     .toString();
 ```
