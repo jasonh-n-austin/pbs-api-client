@@ -10,14 +10,12 @@ import oauth.signpost.exception.OAuthExpectationFailedException;
 import oauth.signpost.exception.OAuthMessageSignerException;
 import oauth.signpost.exception.OAuthNotAuthorizedException;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 
 
 public class PbsOauth {
     private boolean isAuthorizing;
     private static OAuthConsumer consumer;
     private static OAuthProvider provider;
-    private Logger log = Logger.getLogger(getClass());
 
     public PbsOauth(String apiKey, String apiSecret) {
         consumer = new CommonsHttpOAuthConsumer(apiKey, apiSecret);
@@ -70,10 +68,8 @@ public class PbsOauth {
      * @param verifier Verifier as retrieved from request token URL, as called from getRequestTokenUri method.
      */
     public void retrieveAccessToken(String verifier) throws OAuthCommunicationException, OAuthExpectationFailedException, OAuthNotAuthorizedException, OAuthMessageSignerException {
-        log.info(String.format("Retrieving access token with verifier: %s", verifier));
         provider.setOAuth10a(true); //This is SUPER important...won't work without it
         provider.retrieveAccessToken(consumer, verifier);
-        log.info(String.format("Access token retrieved: %s - %s", consumer.getToken(), consumer.getTokenSecret()));
         isAuthorizing = false; // authorization dance is complete
     }
 
