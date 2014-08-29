@@ -1,11 +1,9 @@
-package com.paperbackswap;
+package com.paperbackswap.Url;
 
 import gumi.builders.UrlBuilder;
-import org.apache.commons.lang3.StringUtils;
 
 import java.net.URI;
 import java.net.URL;
-import java.util.HashSet;
 import java.util.Set;
 
 public class PbsUrlBuilder {
@@ -22,24 +20,6 @@ public class PbsUrlBuilder {
             public String toString() {
                 return "Offset";
             }
-        }
-    }
-
-    /**
-     * Provides reference for oauth-related query params
-     */
-    protected static class Oauth {
-        protected final static Set<String> Parameters;
-
-        static {
-            Parameters = new HashSet<String>();
-            Parameters.add("oauth_signature");
-            Parameters.add("oauth_nonce");
-            Parameters.add("oauth_token");
-            Parameters.add("oauth_timestamp");
-            Parameters.add("oauth_consumer_key");
-            Parameters.add("oauth_signature_method");
-            Parameters.add("oauth_version");
         }
     }
 
@@ -75,13 +55,12 @@ public class PbsUrlBuilder {
 
     /**
      * Creates a properly formatted URL for the paperbackswap.com API
-     * @param path
+     * @param url
      * @return
      */
-    public static PbsUrlBuilder fromPath(PbsUrlInfo path) {
-        String[] pathAndQuery = StringUtils.split(path.toString(), "?");
-        String pathPart = pathAndQuery[0];
-        String queryPart = pathAndQuery[1];
+    public static PbsUrlBuilder fromPath(PbsUrl url) {
+        String pathPart = url.getPath();
+        String queryPart = url.getQuery();
 
         UrlBuilder builder = UrlBuilder.empty().withPath(pathPart).withQuery(queryPart);
         return new PbsUrlBuilder(builder);
@@ -143,7 +122,7 @@ public class PbsUrlBuilder {
      * @return
      */
     protected void removeOauthQuery() {
-        removeQuerystringItems(Oauth.Parameters);
+        removeQuerystringItems(PbsOAuthUrl.PARAMETERS);
 /*
         Iterator<String> iterator = builder.queryParameters.keySet().iterator();
         while (iterator.hasNext()) {

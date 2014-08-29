@@ -1,5 +1,6 @@
 package com.paperbackswap;
 
+import com.paperbackswap.Oauth.PbsOauth;
 import org.junit.Assert;
 import org.junit.Test;
 

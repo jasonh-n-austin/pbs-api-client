@@ -1,4 +1,4 @@
-package com.paperbackswap;
+package com.paperbackswap.Url;
 
 public enum Defaults {
     SCHEME {

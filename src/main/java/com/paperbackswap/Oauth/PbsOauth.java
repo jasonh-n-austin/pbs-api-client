@@ -1,5 +1,7 @@
-package com.paperbackswap;
+package com.paperbackswap.Oauth;
 
+import com.paperbackswap.Url.PbsOAuthUrl;
+import com.paperbackswap.Url.PbsUrlBuilder;
 import gumi.builders.UrlBuilder;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
@@ -11,7 +13,6 @@ import oauth.signpost.exception.OAuthMessageSignerException;
 import oauth.signpost.exception.OAuthNotAuthorizedException;
 import org.apache.commons.lang3.StringUtils;
 
-
 public class PbsOauth {
     private boolean isAuthorizing;
     private static OAuthConsumer consumer;
@@ -20,9 +21,9 @@ public class PbsOauth {
     public PbsOauth(String apiKey, String apiSecret) {
         consumer = new CommonsHttpOAuthConsumer(apiKey, apiSecret);
         provider = new CommonsHttpOAuthProvider(
-                PbsUrlInfo.REQUEST_TOKEN.toString(),
-                PbsUrlInfo.ACCESS_TOKEN.toString(),
-                PbsUrlInfo.AUTHORIZE.toString());
+                PbsOAuthUrl.REQUEST_TOKEN.toString(),
+                PbsOAuthUrl.ACCESS_TOKEN.toString(),
+                PbsOAuthUrl.AUTHORIZE.toString());
     }
 
     public PbsOauth(String apiKey, String apiSecret, String token, String secret) {
@@ -112,7 +113,7 @@ public class PbsOauth {
     public static boolean isSigned(String url) {
         UrlBuilder builder = UrlBuilder.fromString(url);
 
-        for (String key : PbsUrlBuilder.Oauth.Parameters) {
+        for (String key : PbsOAuthUrl.PARAMETERS) {
             boolean contains = builder.queryParameters.containsKey(key);
             if (!contains) {
                 return contains;
