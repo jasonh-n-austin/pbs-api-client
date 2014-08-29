@@ -5,10 +5,11 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.paperbackswap.Url.PbsUrlBuilder;
 import com.paperbackswap.exceptions.BookListBuilderException;
+import com.paperbackswap.exceptions.BooksResponseHasErrorsException;
 import com.paperbackswap.exceptions.InvalidBookException;
+import com.paperbackswap.exceptions.InvalidBooksResponseException;
 import com.paperbackswap.modules.BookModule;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import java.util.List;
  * @see com.paperbackswap.Url.PbsUrl
  */
 public class BookListBuilderJson implements BookListBuilder {
-	private static Injector mInjector;
+	protected static Injector mInjector;
 
 	@Inject
 	public BookListBuilderJson() {
@@ -28,7 +29,7 @@ public class BookListBuilderJson implements BookListBuilder {
 	}
 
 	public BookList construct(JSONObject source)
-            throws BookListBuilderException, InvalidBookException {
+            throws BookListBuilderException, InvalidBookException, InvalidBooksResponseException, BooksResponseHasErrorsException {
 		return fromResponse(source);
 	}
 
@@ -39,78 +40,121 @@ public class BookListBuilderJson implements BookListBuilder {
 	 * @return List of books
 	 * @throws BookListBuilderException
 	 */
-	private static BookList fromResponse(JSONObject response)
-            throws BookListBuilderException, InvalidBookException {
-		List<Book> bookList = new ArrayList<Book>();
-		JSONArray booksArr = getBooksArray(response);
-		if (booksArr != null) {
-			for (int i = 0; i < booksArr.length(); i++) {
-				JSONObject book = booksArr.optJSONObject(i);
-				if (book != null) {
-					bookList.add(mInjector.getInstance(BookBuilder.class)
-							.construct(book));
-				}
-			}
-		} else {
-			JSONObject book = getBookObject(response);
-			if (book != null) {
-				bookList.add(mInjector.getInstance(BookBuilder.class)
-						.construct(book));
-			}
-		}
-		return new BookList(bookList, getNextPage(response));
+	protected BookList fromResponse(JSONObject response)
+            throws BookListBuilderException, InvalidBookException, InvalidBooksResponseException, BooksResponseHasErrorsException {
+
+        JSONObject responseObject = response.optJSONObject("Response");
+        if (responseObject == null) {
+            throw new InvalidBooksResponseException("Response object was invalid");
+        }
+        if (responseObject.has("error")) {
+            throw new BooksResponseHasErrorsException(String.format("Error:%s", responseObject.getString("error")));
+        }
+
+        return new BookList(getListOrSingle(responseObject), getNextPage(response));
 	}
 
-	private static JSONObject getBookObject(JSONObject response) throws BookListBuilderException {
-		JSONObject books = getBooksObject(response);
-		return books.optJSONObject("Book");
-	}
-	
-	private static JSONArray getBooksArray(JSONObject response)
-			throws BookListBuilderException {
-		JSONArray bookArr = null;
-		JSONObject books = getBooksObject(response);
-		Object book = books.opt("Book");
+    /**
+     * Expects "Response" object from API response object
+     * Builds a list of all books, or a list with one book if a single is present
+     * @param responseObject
+     * @return
+     * @throws InvalidBooksResponseException
+     * @throws BookListBuilderException
+     * @throws InvalidBookException
+     */
+    protected List<Book> getListOrSingle(JSONObject responseObject) throws InvalidBooksResponseException, BookListBuilderException, InvalidBookException {
+        List<Book> bookList = new ArrayList<Book>();
+        JSONArray booksArr = getBooksArray(responseObject);
+
+        // Tries to get array of books, falls back to single
+        if (booksArr != null) {
+            // Process as an array
+            for (int i = 0; i < booksArr.length(); i++) {
+                JSONObject book = booksArr.optJSONObject(i);
+                if (book != null) {
+                    bookList.add(mInjector.getInstance(BookBuilder.class)
+                            .construct(book));
+                } else {
+                    throw new InvalidBooksResponseException(
+                            String.format("Book at position %d was invalid", i));
+                }
+            }
+        } else {
+            // Process as single book
+            JSONObject book = getBookObject(responseObject);
+            if (book != null) {
+                bookList.add(mInjector.getInstance(BookBuilder.class)
+                        .construct(book));
+            } else {
+                throw new InvalidBooksResponseException("No books were found in the response");
+            }
+        }
+        return bookList;
+    }
+
+
+    /**
+     * Expects "Response" object from API response object
+     * Builds a list of books from response/books
+     * @param responseObject
+     * @return
+     * @throws BookListBuilderException
+     * @throws InvalidBooksResponseException
+     */
+    protected JSONArray getBooksArray(JSONObject responseObject)
+            throws BookListBuilderException, InvalidBooksResponseException {
+        JSONArray bookArr = null;
+        JSONObject books = getBooksObject(responseObject);
+        Object book = books.opt("Book");
         if (!(book instanceof JSONArray)) {
-            return null;
+            throw new InvalidBooksResponseException("Book list was invalid");
         }
         bookArr = books.optJSONArray("Book");
         return bookArr;
+    }
+
+    /**
+     * Expects "Response" object from API response object
+     * @param response
+     * @return
+     * @throws BookListBuilderException
+     * @throws InvalidBooksResponseException
+     */
+    protected JSONObject getBooksObject(JSONObject response)
+            throws BookListBuilderException, InvalidBooksResponseException {
+        return response.optJSONObject("Books");
+    }
+
+    /**
+     * Expects "Response" object from API response object
+     * Retrieves single book from response if no list was provided
+     * @param responseObject
+     * @return
+     * @throws BookListBuilderException
+     * @throws InvalidBooksResponseException
+     */
+	protected JSONObject getBookObject(JSONObject responseObject) throws BookListBuilderException, InvalidBooksResponseException {
+		JSONObject books = getBooksObject(responseObject);
+		return books.optJSONObject("Book");
 	}
 
-	private static JSONObject getBooksObject(JSONObject response)
-			throws BookListBuilderException {
-		if (response != null) {
-			JSONObject resp = response.optJSONObject("Response");
-			if (resp == null || resp.has("error")) {
-				throw new BookListBuilderException(String.format("While retrieving books: %s",
-                        resp != null ? resp.optString("error") : null));
-			} else {
-				return resp.optJSONObject("Books");
-			}
-		} else {
-			throw new BookListBuilderException("Response object was null");
-		}
-	}
-
-	private static PbsUrlBuilder getNextPage(JSONObject response) {
+    /**
+     * Expects "Response" object from API response object
+     * Retrieves URL for next list of results in paged set, if it exists
+     * @param responseObject
+     * @return
+     * @throws BookListBuilderException
+     * @throws InvalidBooksResponseException
+     * @throws BooksResponseHasErrorsException
+     */
+	protected PbsUrlBuilder getNextPage(JSONObject responseObject) throws BookListBuilderException, InvalidBooksResponseException, BooksResponseHasErrorsException {
 		PbsUrlBuilder next = null;
-		if (response.has("Response")) {
-			JSONObject resp = null;
-			try {
-				resp = response.getJSONObject("Response");
-			} catch (JSONException e1) {
-                //TODO: Deal with parsing exceptions
-			}
-			if (resp != null && resp.has("ResultsNextSet")) {
-				try {
-                    next = PbsUrlBuilder.fromUrl(resp.getString("ResultsNextSet"));
-					// next = new URL(resp.getString("ResultsNextSet"));
-				} catch (JSONException e) {
-                    //TODO: Deal with parsing exceptions
-				}
-			}
-		}
-		return next;
+
+        if (responseObject.has("ResultsNextSet")) {
+            next = PbsUrlBuilder.fromUrl(responseObject.getString("ResultsNextSet"));
+        }
+    
+        return next;
 	}
 }

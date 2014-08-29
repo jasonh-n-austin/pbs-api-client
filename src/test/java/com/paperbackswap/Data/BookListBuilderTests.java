@@ -5,7 +5,9 @@ import com.paperbackswap.Test.GuiceJUnitRunner;
 import com.paperbackswap.data.BookList;
 import com.paperbackswap.data.BookListBuilder;
 import com.paperbackswap.exceptions.BookListBuilderException;
+import com.paperbackswap.exceptions.BooksResponseHasErrorsException;
 import com.paperbackswap.exceptions.InvalidBookException;
+import com.paperbackswap.exceptions.InvalidBooksResponseException;
 import com.paperbackswap.modules.BookModule;
 import org.json.JSONObject;
 import org.junit.Before;
@@ -37,11 +39,16 @@ public class BookListBuilderTests {
     }
 
     @Test
-    public void builds_list() throws InvalidBookException, BookListBuilderException {
+    public void builds_list() throws InvalidBookException, BookListBuilderException, InvalidBooksResponseException, BooksResponseHasErrorsException {
         BookList bookList = bookListBuilder.construct(testBooks);
         assertNotNull(bookList);
         assertEquals(bookList.size(), 7);
         assertNotNull(bookList.get(0));
+    }
+
+    @Test(expected = InvalidBooksResponseException.class)
+    public void exception_on_bad_response() throws InvalidBookException, BookListBuilderException, InvalidBooksResponseException, BooksResponseHasErrorsException {
+        BookList bookList = bookListBuilder.construct(new JSONObject("{}"));
     }
 
 }
