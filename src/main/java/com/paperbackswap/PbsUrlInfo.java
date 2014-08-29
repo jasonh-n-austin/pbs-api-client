@@ -6,16 +6,6 @@ import gumi.builders.UrlBuilder;
  * List of supported paths in the paperbackswap.com API
 */
 public enum PbsUrlInfo {
-    KEY_ISBN {
-        public String toString() {
-            return "ISBN";
-        }
-    },
-    KEY_LIMIT {
-        public String toString() {
-            return "Limit";
-        }
-    },
     /**
      * Returns fully formed URL with http/www URL
      */

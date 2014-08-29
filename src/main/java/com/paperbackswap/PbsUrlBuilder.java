@@ -50,7 +50,7 @@ public class PbsUrlBuilder {
     protected PbsUrlBuilder(UrlBuilder builder) {
         this.builder = builder;
         this.builder = addHostAndScheme(builder);
-        this.builder = this.builder.setParameter(PbsUrlInfo.KEY_LIMIT.toString(), DEFAULT_LIMIT.toString());
+        this.builder = this.builder.setParameter(PbsUrlParams.LIMIT.toString(), DEFAULT_LIMIT.toString());
     }
 
     /**
@@ -122,17 +122,17 @@ public class PbsUrlBuilder {
      * @return
      */
     public PbsUrlBuilder withIsbn(String isbn) {
-        builder = builder.setParameter(PbsUrlInfo.KEY_ISBN.toString(), isbn);
+        builder = builder.setParameter(PbsUrlParams.ISBN.toString(), isbn);
         return this;
     }
 
     // Extract the ISBN from an PBS API URL.
     public Long extractIsbn() {
 
-        if (builder.queryParameters.containsKey(PbsUrlInfo.KEY_ISBN)) {
+        if (builder.queryParameters.containsKey(PbsUrlParams.ISBN)) {
             // Get first query param match
             return Long.parseLong(builder.queryParameters.get(
-                    PbsUrlInfo.KEY_ISBN.toString()
+                    PbsUrlParams.ISBN.toString()
             ).get(0));
         }
         return 0L;

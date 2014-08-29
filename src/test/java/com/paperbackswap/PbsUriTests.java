@@ -42,6 +42,6 @@ public class PbsUriTests {
     @Test
     public void sets_default_limit() {
         builder = PbsUrlBuilder.fromPath(PbsUrlInfo.MEMBER_WISH_LIST);
-        assertTrue(builder.toUri().getQuery().contains(PbsUrlInfo.KEY_LIMIT.toString()));
+        assertTrue(builder.toUri().getQuery().contains(PbsUrlParams.LIMIT.toString()));
     }
 }
