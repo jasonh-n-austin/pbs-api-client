@@ -3,9 +3,9 @@ package com.paperbackswap.data;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-
 import com.paperbackswap.Url.PbsUrlBuilder;
 import com.paperbackswap.exceptions.BookListBuilderException;
+import com.paperbackswap.exceptions.InvalidBookException;
 import com.paperbackswap.modules.BookModule;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,7 +28,7 @@ public class BookListBuilderJson implements BookListBuilder {
 	}
 
 	public BookList construct(JSONObject source)
-			throws BookListBuilderException {
+            throws BookListBuilderException, InvalidBookException {
 		return fromResponse(source);
 	}
 
@@ -40,7 +40,7 @@ public class BookListBuilderJson implements BookListBuilder {
 	 * @throws BookListBuilderException
 	 */
 	private static BookList fromResponse(JSONObject response)
-			throws BookListBuilderException {
+            throws BookListBuilderException, InvalidBookException {
 		List<Book> bookList = new ArrayList<Book>();
 		JSONArray booksArr = getBooksArray(response);
 		if (booksArr != null) {

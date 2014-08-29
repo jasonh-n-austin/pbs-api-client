@@ -10,7 +10,7 @@ import java.net.URI;
 
 import static org.junit.Assert.*;
 
-public class PbsUrlInfoTests {
+public class PbsUrlTests {
     private PbsUrlBuilder builder;
 
     @Test
@@ -39,7 +39,15 @@ public class PbsUrlInfoTests {
 
     @Test
     public void creates_with_isbn() {
-        builder = PbsUrlBuilder.fromPath(PbsUrl.ISBN_LIST).withIsbn(1234L);
+        builder = PbsUrlBuilder.fromPath(PbsUrl.ISBN_LIST).withIsbn("1234");
+        assertNotNull(builder);
+        assertTrue(builder.toUri().getQuery().contains("ISBN=1234"));
+    }
+
+
+    @Test
+    public void creates_with_isbn_string() {
+        builder = PbsUrlBuilder.fromPath(PbsUrl.ISBN_LIST).withIsbn("1234");
         assertNotNull(builder);
         assertTrue(builder.toUri().getQuery().contains("ISBN=1234"));
     }
@@ -57,5 +65,27 @@ public class PbsUrlInfoTests {
         assertTrue(uri.getScheme().startsWith("http"));
         assertTrue(uri.getHost().startsWith("www"));
         assertTrue(uri.getQuery().toString().contains("RequestType="));
+    }
+
+    @Test
+    public void adds_offset_with_default_limit() {
+        PbsUrlBuilder builder = PbsUrl.BOOK_SHELF.toBuilder();
+        assertFalse(builder.toUri().getQuery().contains("Offset="));
+        assertTrue(builder.toUri().getQuery().contains("Limit=50")); //default
+
+        builder.withOffset(50);
+        assertTrue(builder.toUri().getQuery().contains("Offset=50"));
+        assertTrue(builder.toUri().getQuery().contains("Limit=50")); //default
+    }
+
+    @Test
+    public void adds_offset_with_set_limit() {
+        PbsUrlBuilder builder = PbsUrl.BOOK_SHELF.toBuilder();
+        assertFalse(builder.toUri().getQuery().contains("Offset="));
+        assertTrue(builder.toUri().getQuery().contains("Limit=50")); //default
+
+        builder.withOffsetLimit(10, 10);
+        assertTrue(builder.toUri().getQuery().contains("Offset=10"));
+        assertTrue(builder.toUri().getQuery().contains("Limit=10")); //default
     }
 }

@@ -45,7 +45,11 @@ public enum PbsUrl {
     }
 
     public String toString() {
-        return PbsUrlBuilder.fromPath(this).toString();
+        return toBuilder().toString();
+    }
+
+    public PbsUrlBuilder toBuilder() {
+        return PbsUrlBuilder.fromPath(this);
     }
 
     public URI toUri() {

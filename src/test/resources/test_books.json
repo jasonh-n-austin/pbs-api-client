@@ -1,0 +1,162 @@
+{
+    "Response": {
+        "APIVersion": "1.0",
+        "RequestType": "Bookshelf",
+        "ResponseID": "bDVNcXE3WDl5VW89",
+        "Limit": "50",
+        "Offset": "0",
+        "GrandTotalResults": "7",
+        "ResultsThisResponse": "7",
+        "Books": {
+            "Book": [
+                {
+                    "ISBN-13": "9780470770184",
+                    "ISBN-10": "047077018X",
+                    "BookDetailsLink": "http://www.paperbackswap.com/Android-Application-Development-Donn-Felker/book/047077018X/&_ads=widget&m=referral&c=API&k=",
+                    "Title": "Android Application Development For Dummies<sup>?</sup> (For Dummies (Computer/Tech))",
+                    "Authors": {
+                        "Author": "Donn Felker"
+                    },
+                    "CoverImages": {
+                        "SmallImage": "http://cc.pbsstatic.com/s/84/0184/9780470770184.jpg",
+                        "MediumImage": "http://cc.pbsstatic.com/m/84/0184/9780470770184.jpg",
+                        "LargeImage": "http://a.pbsstatic.com/images/no_cover/no_cover_322_475.png"
+                    },
+                    "Binding": "Paperback",
+                    "Rating": "4.0",
+                    "PostedDateTimeStamp": "1373730769",
+                    "PostedDate": "7/13/2013 11:52.49 AM ET",
+                    "Status": "Transferred / On Hold",
+                    "BuyItNew": "http://www.amazon.com/gp/product/047077018X?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=047077018X"
+                },
+                {
+                    "ISBN-13": "9781570671036",
+                    "ISBN-10": "1570671036",
+                    "BookDetailsLink": "http://www.paperbackswap.com/Becoming-Vegan-Complete-Guide-Adopting/book/1570671036/&_ads=widget&m=referral&c=API&k=",
+                    "Title": "Becoming Vegan: The Complete Guide to Adopting a Healthy Plant-Based Diet",
+                    "Authors": {
+                        "Author": [
+                            "Vesanto Melina",
+                            "Brenda Davis"
+                        ]
+                    },
+                    "CoverImages": {
+                        "SmallImage": "http://cd.pbsstatic.com/s/36/1036/9781570671036.jpg",
+                        "MediumImage": "http://cd.pbsstatic.com/m/36/1036/9781570671036.jpg",
+                        "LargeImage": "http://a.pbsstatic.com/images/no_cover/no_cover_322_475.png"
+                    },
+                    "Binding": "Paperback",
+                    "Rating": "4.0",
+                    "PostedDateTimeStamp": "1382067880",
+                    "PostedDate": "10/17/2013 11:44.40 PM ET",
+                    "Status": "Transferred / On Hold",
+                    "BuyItNew": "http://www.amazon.com/gp/product/1570671036?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=1570671036"
+                },
+                {
+                    "ISBN-13": "9781930604391",
+                    "ISBN-10": "1930604394",
+                    "BookDetailsLink": "http://www.paperbackswap.com/Dale-Grooms-Texas-Dale-Groom/book/1930604394/&_ads=widget&m=referral&c=API&k=",
+                    "Title": "Dale Groom's Texas Gardening Guide - Revised Edition",
+                    "Authors": {
+                        "Author": "Dale Groom"
+                    },
+                    "CoverImages": {
+                        "SmallImage": "http://ca.pbsstatic.com/s/91/4391/9781930604391.jpg",
+                        "MediumImage": "http://ca.pbsstatic.com/m/91/4391/9781930604391.jpg",
+                        "LargeImage": "http://a.pbsstatic.com/images/no_cover/no_cover_322_475.png"
+                    },
+                    "Binding": "Paperback",
+                    "Rating": "4.0",
+                    "PostedDateTimeStamp": "1357920381",
+                    "PostedDate": "1/11/2013 11:06.21 AM ET",
+                    "Status": "Transferred / On Hold",
+                    "BuyItNew": "http://www.amazon.com/gp/product/1930604394?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=1930604394"
+                },
+                {
+                    "ISBN-13": "9780756629946",
+                    "ISBN-10": "0756629942",
+                    "BookDetailsLink": "http://www.paperbackswap.com/Dinosaurs-DK-Publishing/book/0756629942/&_ads=widget&m=referral&c=API&k=",
+                    "Title": "Dinosaurs!",
+                    "Authors": {
+                        "Author": "DK Publishing"
+                    },
+                    "CoverImages": {
+                        "SmallImage": "http://cd.pbsstatic.com/s/46/9946/9780756629946.jpg",
+                        "MediumImage": "http://cd.pbsstatic.com/m/46/9946/9780756629946.jpg",
+                        "LargeImage": "http://a.pbsstatic.com/images/no_cover/no_cover_322_475.png"
+                    },
+                    "Binding": "Hardcover",
+                    "Rating": "0.0",
+                    "PostedDateTimeStamp": "1373818642",
+                    "PostedDate": "7/14/2013 12:17.22 PM ET",
+                    "Status": "Active",
+                    "BuyItNew": "http://www.amazon.com/gp/product/0756629942?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0756629942"
+                },
+                {
+                    "ISBN-13": "9780810988927",
+                    "ISBN-10": "0810988925",
+                    "BookDetailsLink": "http://www.paperbackswap.com/Last-Straw-Diary-Jeff-Kinney/book/0810988925/&_ads=widget&m=referral&c=API&k=",
+                    "Title": "The Last Straw (Diary of a Wimpy Kid, Bk 3)",
+                    "Authors": {
+                        "Author": "Jeff Kinney"
+                    },
+                    "CoverImages": {
+                        "SmallImage": "http://cd.pbsstatic.com/s/27/8927/9780810988927.jpg",
+                        "MediumImage": "http://cd.pbsstatic.com/m/27/8927/9780810988927.jpg",
+                        "LargeImage": "http://a.pbsstatic.com/images/no_cover/no_cover_322_475.png"
+                    },
+                    "Binding": "Paperback",
+                    "Rating": "4.4",
+                    "PostedDateTimeStamp": "1373572601",
+                    "PostedDate": "7/11/2013 3:56.41 PM ET",
+                    "Status": "Transferred / On Hold",
+                    "BuyItNew": "http://www.amazon.com/gp/product/0810988925?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0810988925"
+                },
+                {
+                    "ISBN-13": "9780385050401",
+                    "ISBN-10": "0385050402",
+                    "BookDetailsLink": "http://www.paperbackswap.com/Odyssey/book/0385050402/&_ads=widget&m=referral&c=API&k=",
+                    "Title": "The Odyssey",
+                    "Authors": {
+                        "Author": [
+                            "Robert Fitzgerald (Translator)",
+                            "Homer"
+                        ]
+                    },
+                    "CoverImages": {
+                        "SmallImage": "http://ca.pbsstatic.com/s/01/0401/9780385050401.jpg",
+                        "MediumImage": "http://ca.pbsstatic.com/m/01/0401/9780385050401.jpg",
+                        "LargeImage": "http://a.pbsstatic.com/images/no_cover/no_cover_322_475.png"
+                    },
+                    "Binding": "Paperback",
+                    "Rating": "3.9",
+                    "PostedDateTimeStamp": "1271807361",
+                    "PostedDate": "4/20/2010 7:49.21 PM ET",
+                    "Status": "Transferred / On Hold",
+                    "BuyItNew": "http://www.amazon.com/gp/product/0385050402?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0385050402"
+                },
+                {
+                    "ISBN-13": "9781605290096",
+                    "ISBN-10": "1605290092",
+                    "BookDetailsLink": "http://www.paperbackswap.com/Womens-Health-Total-Joanna-Williams/book/1605290092/&_ads=widget&m=referral&c=API&k=",
+                    "Title": "Women's Health Total Fitness Guide 2009",
+                    "Authors": {
+                        "Author": "Joanna Williams"
+                    },
+                    "CoverImages": {
+                        "SmallImage": "http://cd.pbsstatic.com/s/96/0096/9781605290096.jpg",
+                        "MediumImage": "http://cd.pbsstatic.com/m/96/0096/9781605290096.jpg",
+                        "LargeImage": "http://a.pbsstatic.com/images/no_cover/no_cover_322_475.png"
+                    },
+                    "Binding": "Hardcover",
+                    "Rating": "5.0",
+                    "PostedDateTimeStamp": "1373818524",
+                    "PostedDate": "7/14/2013 12:15.24 PM ET",
+                    "Status": "Active",
+                    "BuyItNew": "http://www.amazon.com/gp/product/1605290092?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=1605290092"
+                }
+            ]
+        },
+        "ResponseTime": "0.032582998275757"
+    }
+}

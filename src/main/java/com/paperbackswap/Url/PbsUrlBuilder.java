@@ -66,9 +66,15 @@ public class PbsUrlBuilder {
         return new PbsUrlBuilder(builder);
     }
 
+    public PbsUrlBuilder withOffset(Integer offset) {
+        builder = builder.setParameter(PagingParameters.LIMIT.toString(), DEFAULT_LIMIT.toString())
+                .setParameter(PagingParameters.OFFSET.toString(), offset.toString());
+        return this;
+    }
+
     public PbsUrlBuilder withOffsetLimit(Integer offset, Integer limit) {
         builder = builder.setParameter(PagingParameters.LIMIT.toString(), limit.toString())
-                .setParameter(PagingParameters.OFFSET.toString(), limit.toString());
+                .setParameter(PagingParameters.OFFSET.toString(), offset.toString());
         return this;
     }
 
@@ -84,15 +90,6 @@ public class PbsUrlBuilder {
 
     public URI toUri() {
         return builder.toUri();
-    }
-
-    /**
-     * Fills in provided ISBN in URI parameter
-     * @param isbn
-     * @return
-     */
-    public PbsUrlBuilder withIsbn(Long isbn) {
-        return withIsbn(isbn.toString());
     }
 
     /**
