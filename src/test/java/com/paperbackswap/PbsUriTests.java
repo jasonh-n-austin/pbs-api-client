@@ -13,8 +13,8 @@ public class PbsUriTests {
     public void creates_new_uri() {
         builder = PbsUrlBuilder.fromPath(PbsUrlInfo.MEMBER_WISH_LIST);
         URI uri = builder.toUri();
-        assertEquals(uri.getHost(), PbsUrlInfo.DEFAULT_HOST.toString());
-        assertEquals(uri.getScheme(), PbsUrlInfo.DEFAULT_SCHEME.toString());
+        assertEquals(uri.getHost(), Defaults.HOST.toString());
+        assertEquals(uri.getScheme(), Defaults.SCHEME.toString());
         assertTrue((uri.getPath()+"?RequestType=MemberWishList").startsWith(PbsUrlInfo.MEMBER_WISH_LIST.toString()));
     }
 
@@ -22,8 +22,8 @@ public class PbsUriTests {
     public void reverts_to_http() {
         builder = PbsUrlBuilder.fromUrl("https://secure.paperbackswap.com/v2/xxx");
         URI uri = builder.toUri();
-        assertEquals(uri.getHost(), PbsUrlInfo.DEFAULT_HOST.toString());
-        assertEquals(uri.getScheme(), PbsUrlInfo.DEFAULT_SCHEME.toString());
+        assertEquals(uri.getHost(), Defaults.HOST.toString());
+        assertEquals(uri.getScheme(), Defaults.SCHEME.toString());
     }
 
     @Test
@@ -42,6 +42,6 @@ public class PbsUriTests {
     @Test
     public void sets_default_limit() {
         builder = PbsUrlBuilder.fromPath(PbsUrlInfo.MEMBER_WISH_LIST);
-        assertTrue(builder.toUri().getQuery().contains(PbsUrlInfo.LIMIT_KEY.toString()));
+        assertTrue(builder.toUri().getQuery().contains(PbsUrlInfo.KEY_LIMIT.toString()));
     }
 }

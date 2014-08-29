@@ -6,22 +6,12 @@ import gumi.builders.UrlBuilder;
  * List of supported paths in the paperbackswap.com API
 */
 public enum PbsUrlInfo {
-    DEFAULT_SCHEME {
-        public String toString() {
-            return "http";
-        }
-    },
-    DEFAULT_HOST {
-        public String toString() {
-            return "www.paperbackswap.com";
-        }
-    },
-    ISBN_KEY {
+    KEY_ISBN {
         public String toString() {
             return "ISBN";
         }
     },
-    LIMIT_KEY {
+    KEY_LIMIT {
         public String toString() {
             return "Limit";
         }
@@ -32,8 +22,8 @@ public enum PbsUrlInfo {
     REQUEST_TOKEN {
         public String toString() {
             return UrlBuilder.empty()
-                    .withHost(DEFAULT_HOST.toString())
-                    .withScheme(DEFAULT_SCHEME.toString())
+                    .withHost(Defaults.HOST.toString())
+                    .withScheme(Defaults.SCHEME.toString())
                     .withPath("/api/request_token.php")
                     .toString();
         }
@@ -44,8 +34,8 @@ public enum PbsUrlInfo {
     AUTHORIZE {
         public String toString() {
             return UrlBuilder.empty()
-                    .withHost(DEFAULT_HOST.toString())
-                    .withScheme(DEFAULT_SCHEME.toString())
+                    .withHost(Defaults.HOST.toString())
+                    .withScheme(Defaults.SCHEME.toString())
                     .withPath("/api/authorize.php")
                     .toString();
         }
@@ -56,8 +46,8 @@ public enum PbsUrlInfo {
     ACCESS_TOKEN {
         public String toString() {
             return UrlBuilder.empty()
-                    .withHost(DEFAULT_HOST.toString())
-                    .withScheme(DEFAULT_SCHEME.toString())
+                    .withHost(Defaults.HOST.toString())
+                    .withScheme(Defaults.SCHEME.toString())
                     .withPath("/api/access_token.php")
                     .toString();
         }
