@@ -68,3 +68,8 @@ PbsUrlBuilder builder = PbsUrlBuilder
     .withIsbn(0312851820)
     .toString();
 ```
+
+## Thanks
+Acknowledgements to a few great Java libraries that made this much tidier
+* [Signpost by mttkay](https://github.com/mttkay/signpost)
+* [Urlbuilder by mikaelhg](https://github.com/mikaelhg/urlbuilder)
