@@ -1,16 +1,15 @@
 pbs-api-client v1.2.1
 ==============
 
-API client/SDK for Paperbackswap.com
+h2. API client/SDK for Paperbackswap.com
 
-Built as a standalone Java library, usable in Android.
-
-Builds with Gradle.
-
-Uses fluent syntax wherever possible (perhaps at a slight loss of efficiency as mikaelhg's UrlBuilder is final)
+* Built as a standalone Java 1.5+ library, usable in Android.
+* Builds with Gradle.
+* Uses fluent syntax wherever possible (perhaps at a slight loss of efficiency as mikaelhg's UrlBuilder is final)
 
 **Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
 
+- [pbs-api-client v1.2.1](#user-content-pbs-api-client-v121)
 - [Common Usage](#user-content-common-usage)
 	- [Build URLs](#user-content-build-urls)
 		- [Do the OAuth 1.0a dance](#user-content-do-the-oauth-10a-dance)
@@ -21,7 +20,9 @@ Uses fluent syntax wherever possible (perhaps at a slight loss of efficiency as 
 		- [Set an isbn in the URL](#user-content-set-an-isbn-in-the-url)
 	- [Deserialize responses](#user-content-deserialize-responses)
 		- [Turn response text/json into a list of books](#user-content-turn-response-textjson-into-a-list-of-books)
-- [Acknowledgements](#user-content-acknowledgements)
+		- [Get next page of results](#user-content-get-next-page-of-results)
+		- [Deserialize one book](#user-content-deserialize-one-book)
+	- [Acknowledgements](#user-content-acknowledgements)
 	
 
 # Common Usage
@@ -87,8 +88,6 @@ PbsUrlInfo.ADD_TO_WISH_LIST.toBuilder()
 ```
 
 ## Deserialize responses
-The section assumes a dependency on Guava for injection to construct book lists.
-
 It should be noted that the BookListBuilder will process single book responses (e.g. RequestType=ISBNList when only one ISBN is provided) or a list of books. 
 May not work properly with Requests at this point. 
 Not every field is guaranteed to be deseralized (feel free to PR more).
