@@ -1,6 +1,3 @@
-pbs-api-client v1.2.1
-==============
-
 # API client/SDK for Paperbackswap.com
 
 * Built as a standalone Java 1.5+ library, usable in Android.
@@ -9,7 +6,6 @@ pbs-api-client v1.2.1
 
 **Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
 
-- [pbs-api-client v1.2.1](#user-content-pbs-api-client-v121)
 - [Common Usage](#user-content-common-usage)
 	- [Build URLs](#user-content-build-urls)
 		- [Do the OAuth 1.0a dance](#user-content-do-the-oauth-10a-dance)
