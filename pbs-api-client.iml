@@ -31,7 +31,6 @@
     <orderEntry type="library" exported="" name="Gradle: cglib-2.2.1-v20090111" level="project" />
     <orderEntry type="library" exported="" name="Gradle: asm-3.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: commons-io-2.4" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: mockito-all-1.9.5" level="project" />
   </component>
 </module>
 
