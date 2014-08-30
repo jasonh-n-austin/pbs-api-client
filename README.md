@@ -99,19 +99,19 @@ Not every field is guaranteed to be deseralized (feel free to PR more).
 
 ### Turn response text/json into a list of books
 ```
-@Inject
-public void processResponse(BookListBuilder bookListBuilder) {
-    // Go fetch response with your favorite HTTP client stack => response
-    BookList bookList = bookListBuilder.construct(response));
-    for (Book book : bookList) {
-        System.out.println(book.getTitle);
-    }
+// Go fetch response with your favorite HTTP client stack => response
+Book book = BooksFactory.getBook(response)
+System.out.println(book.getTitle());
+
+BookList bookList = BooksFactory.getBookList(response);
+for (Book book : bookList) {
+    System.out.println(book.getTitle());
 }
 
 ```
 
 
-# Acknowledgements
+## Acknowledgements
 Thanks to a few great Java libraries that made this much tidier
 * [Signpost by mttkay](https://github.com/mttkay/signpost)
 * [Urlbuilder by mikaelhg](https://github.com/mikaelhg/urlbuilder)
