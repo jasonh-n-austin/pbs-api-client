@@ -1,4 +1,4 @@
-pbs-api-client v1.2
+pbs-api-client v1.2.1
 ==============
 
 API client/SDK for Paperbackswap.com
@@ -40,20 +40,16 @@ oauth.retrieveAccessToken(verifier)
 System.out.println(oauth.isAuthorizing()); // "false"
 
 String signedUrl = oauth.signRequest(
-    PbsUrlBuilder builder = PbsUrlBuilder
-        .fromPath(PbsUrlInfo.MEMBER_WISH_LIST)
-        .toString();
-        );
+    PbsUrlInfo.MEMBER_WISH_LIST.toString();
+);
 ```
 
 ### Sign the request with saved token/secret
 ```java
 PbsOauth oauth = PbsOauth("key", "secret", "token", "tokensecret");
 String signedUrl = oauth.signRequest(
-    PbsUrlBuilder builder = PbsUrlBuilder
-        .fromPath(PbsUrlInfo.MEMBER_WISH_LIST)
-        .toString();
-        );
+    PbsUrlInfo.MEMBER_WISH_LIST.toString()
+);
 ```
 
 ### Build a URL from the know list
@@ -69,10 +65,10 @@ PbsUrlBuilder builder = PbsUrlBuilder
 
 ### Build a URL from a string
 
-This is typically utilized when passing links from a response, e.g. 'ResultsNextSet'
+In the event that you need to build your own URL
 ```java
 PbsUrlBuilder builder = PbsUrlBuilder
-    .fromUrl(nextPage)
+    .fromUrl(url)
     .toString();
 ```
 
@@ -100,19 +96,35 @@ Not every field is guaranteed to be deseralized (feel free to PR more).
 ### Turn response text/json into a list of books
 ```
 // Go fetch response with your favorite HTTP client stack => response
-Book book = BooksFactory.getBook(response)
-System.out.println(book.getTitle());
-
 BookList bookList = BooksFactory.getBookList(response);
 for (Book book : bookList) {
     System.out.println(book.getTitle());
 }
+```
 
+### Get next page of results
+This is useful when using HTTP, as PBS API automatically generates HTTPS URLs in paging elements. 
+The getNextPage() method fixes this behavior, and maintains HTTP.
+```
+// Go fetch response with your favorite HTTP client stack => response
+BookList bookList = BooksFactory.getBookList(response);
+// Returns PbsUrlBuilder, so you can manipulate if needed
+System.out.println(bookList.getNextPage().toString());
+```
+
+### Deserialize one book
+```
+// Extract one book's JSON => json
+
+// Not typically used directly, this is used internally by getBookList
+// Will not work correctly with PBS response
+Book book = BooksFactory.getBook(json)
+System.out.println(book.getTitle());
 ```
 
 
 ## Acknowledgements
 Thanks to a few great Java libraries that made this much tidier
-* [Signpost by mttkay](https://github.com/mttkay/signpost)
-* [Urlbuilder by mikaelhg](https://github.com/mikaelhg/urlbuilder)
-* [Guava by Google](https://code.google.com/p/guava-libraries/)
+* [Signpost by mttkay](https://github.com/mttkay/signpost) for OAuth
+* [Urlbuilder by mikaelhg](https://github.com/mikaelhg/urlbuilder) for manipulating URLs
+* [Guava by Google](https://code.google.com/p/guava-libraries/) for dependency injection & testing
