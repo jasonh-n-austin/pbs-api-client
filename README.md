@@ -1,7 +1,7 @@
 pbs-api-client v1.2.1
 ==============
 
-h2. API client/SDK for Paperbackswap.com
+# API client/SDK for Paperbackswap.com
 
 * Built as a standalone Java 1.5+ library, usable in Android.
 * Builds with Gradle.
