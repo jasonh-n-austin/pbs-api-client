@@ -1,4 +1,4 @@
-package com.paperbackswap;
+package com.paperbackswap.Url;
 
 import com.paperbackswap.Url.Defaults;
 import com.paperbackswap.Url.PbsOAuthUrl;

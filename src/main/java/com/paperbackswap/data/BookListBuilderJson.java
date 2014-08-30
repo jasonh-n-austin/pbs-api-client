@@ -51,7 +51,7 @@ public class BookListBuilderJson implements BookListBuilder {
             throw new BooksResponseHasErrorsException(String.format("Error:%s", responseObject.getString("error")));
         }
 
-        return new BookList(getListOrSingle(responseObject), getNextPage(response));
+        return new BookList(getListOrSingle(responseObject), getNextPage(responseObject));
 	}
 
     /**

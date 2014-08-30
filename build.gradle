@@ -2,7 +2,6 @@ apply plugin: 'java'
 apply plugin: 'maven'
 
 sourceCompatibility = 1.5
-version = '1.1.0'
 
 repositories {
     mavenCentral()
@@ -13,9 +12,10 @@ repositories {
 
 jar {
     baseName 'pbs-api-client'
-    version '1.2.0'
+    version '1.2.1'
     manifest {
-        attributes 'pbs-api-client': 'Paperbackswap.com API Client', 'Implementation-Version': 1.2
+        attributes 'pbs-api-client': 'Paperbackswap.com API Client',
+                'Implementation-Version': version
     }
 }
 
