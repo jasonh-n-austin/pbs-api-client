@@ -1,75 +1,29 @@
-apply plugin: 'java'
-apply plugin: 'maven-publish'
-apply plugin: 'signing'
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+    dependencies {
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:0.5"
+    }
+}
 
-sourceCompatibility = 1.5
+['java', 'signing', 'maven', 'com.jfrog.bintray'].each {
+    apply plugin: it
+}
+
+//should run `gradlew clean gPFFJP pP publish`
+
+group 'pbs-api-client'
+//artifactId 'pbs-api-client'
+version '1.2.1'
 
 repositories {
-    mavenCentral()
+    jcenter()
     maven {
         url "http://maven2.gueck.com/releases"
     }
 }
-
-jar {
-    baseName 'pbs-api-client'
-    version '1.2.1'
-    manifest {
-        attributes 'pbs-api-client': 'Paperbackswap.com API Client',
-                'Implementation-Version': version
-    }
-}
-
-task javadocJar(type: Jar) {
-    classifier = 'javadoc'
-    from javadoc
-}
-
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-artifacts {
-    archives javadocJar, sourcesJar
-}
-
-signing {
-    sign configurations.archives
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId 'org.paperbackswap'
-            artifactId 'pbs-api-client'
-            version '1.2.1'
-
-            from components.java
-
-            pom.withXml {
-                def root = asNode()
-                root.appendNode('name', 'API Client/SDK for Paperbackswap.com')
-                root.appendNode('description', 'Provides OAuth, URLs, and deserialization of PBS API')
-                root.appendNode('url', 'https://github.com/jasonh-n-austin/pbs-api-client')
-                root.appendNode('inceptionYear', '2014')
-                def scm = root.appendNode('scm')
-                scm.appendNode('url', 'https://github.com/jasonh-n-austin/pbs-api-client')
-                scm.appendNode('connection', 'scm:https://jasharmon@github.com/jasonh-n-austin/pbs-api-client.git')
-                scm.appendNode('developerConnection', 'scm:git://github.com/jasonh-n-austin/pbs-api-client.git')
-                def license = root.appendNode('licenses').appendNode('license')
-                license.appendNode('name', 'The MIT License (MIT)')
-                license.appendNode('url', 'http://www.opensource.org/licenses/mit-license.php')
-                license.appendNode('distribution', 'repo')
-                def developer = root.appendNode('developers').appendNode('developer')
-                developer.appendNode('id', 'jasonh-n-austin')
-                developer.appendNode('name', 'Jason Harmon')
-                developer.appendNode('email', 'jason.harmon@gmail.com')
-            }
-        }
-    }
-}
-
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
@@ -80,4 +34,95 @@ dependencies {
     compile group: 'org.json', name: 'json', version: '20140107'
     compile group: 'com.google.inject', name: 'guice', version: '3.0'
     compile group: 'commons-io', name: 'commons-io', version: '2.4'
+}
+
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+clean { delete("$rootDir/out") }
+
+println "> Running Gradle [${project.gradle.gradleVersion}], Groovy [${GroovySystem.version}], Java [${System.getProperty('java.version')}]"
+println "> Building [${project.group}:${project.name}:${project.version}]"
+task wrapper(type: Wrapper) { gradleVersion = '2.0' }
+
+// javadoc.jar generation
+task javadocJar(type: Jar, dependsOn: javadoc) { // (1)
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+// sources.jar generation
+task sourceJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+// summarize artifacts
+artifacts {
+    archives jar
+    archives sourceJar
+    archives javadocJar
+}
+// sign pom
+signing {
+    sign configurations.archives
+}
+task writeNewPom << {
+    pom {
+        pomDirName 'libs'
+        project {
+            name 'API Client/SDK for Paperbackswap.com'
+            description 'Provides OAuth, URLs, and deserialization of PBS API'
+            url 'https://github.com/jasonh-n-austin/pbs-api-client'
+            inceptionYear '2014'
+            scm {
+                url 'https://github.com/jasonh-n-austin/pbs-api-client.git'
+                connection 'scm:https://jasharmon@github.com/jasonh-n-austin/pbs-api-client.git'
+                developerConnection 'scm:git://github.com/jasonh-n-austin/pbs-api-client.git'
+            }
+            licenses {
+                license {
+                    name 'The MIT License (MIT)'
+                    url 'http://www.opensource.org/licenses/mit-license.php'
+                    distribution 'repo'
+                }
+                developer {
+                    id 'jasonh-n-austin'
+                    name 'Jason Harmon'
+                    email 'jason.harmon@gmail.com'
+                }
+            }
+        }
+    }.writeTo("$buildDir/pom.xml")
+    sign "$buildDir/pom.xml"
+}
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            pom.project {
+                name 'API Client/SDK for Paperbackswap.com'
+                description 'Provides OAuth, URLs, and deserialization of PBS API'
+                url 'https://github.com/jasonh-n-austin/pbs-api-client'
+                inceptionYear '2014'
+                scm {
+                    url 'https://github.com/jasonh-n-austin/pbs-api-client.git'
+                    connection 'scm:https://jasharmon@github.com/jasonh-n-austin/pbs-api-client.git'
+                    developerConnection 'scm:git://github.com/jasonh-n-austin/pbs-api-client.git'
+                }
+                licenses {
+                    license {
+                        name 'The MIT License (MIT)'
+                        url 'http://www.opensource.org/licenses/mit-license.php'
+                        distribution 'repo'
+                    }
+                    developer {
+                        id 'jasonh-n-austin'
+                        name 'Jason Harmon'
+                        email 'jason.harmon@gmail.com'
+                    }
+                }
+            }
+        }
+    }
 }

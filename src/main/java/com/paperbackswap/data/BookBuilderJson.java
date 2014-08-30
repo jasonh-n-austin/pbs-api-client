@@ -39,31 +39,11 @@ public class BookBuilderJson implements BookBuilder {
             book.setAvailable(source.optBoolean("Available"));
             book.setQueuePosition(source.optInt("WishQueuePosition"));
             book.setQueueTotal(source.optInt("WishQueueTotal"));
-
-            //TODO: Deal with caching in Android app
-            //cacheBook(book);
         } else {
             throw new InvalidBookException();
         }
 		return book;
 	}
-/*
-    private void cacheBook(Book book) {
-        BookListCache cache = BookListCache.getInstance();
-        if (book.getAvailable()) {
-            cache.addAvailableItem(book);
-        }
-
-        if (book.getQueueTotal() > 0) {
-            cache.addWishListItem(book);
-        }
-
-        if (!StringUtils.isEmpty(book.getStatus())) {
-            cache.addBookShelfItem(book);
-        }
-
-    }
-*/
 
     List<String> getAuthors(JSONObject book) {
 		List<String> list = new ArrayList<String>();
