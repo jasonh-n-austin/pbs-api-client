@@ -1,4 +1,5 @@
-# ![alt text](pbs_dev_logo.jpg "PBS Developers") API client/SDK for Paperbackswap.com
+![alt text](pbs_dev_logo.jpg "PBS Developers") 
+# API client/SDK for Paperbackswap.com
 
 * Built as a standalone Java 1.5+ library, usable in Android.
 * Builds with Gradle.
