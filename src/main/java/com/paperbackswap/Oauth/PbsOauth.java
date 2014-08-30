@@ -47,7 +47,7 @@ public class PbsOauth {
     /**
      * Called to begin OAuth dance. Open the returned URL in a browser,
      * @param callback URI to redirect to when authorization is complete, be sure to have listener configured.
-     *                 Listener will need to capture {@link}=oauth.signpost.OAuth.OAUTH_VERIFIER query parameter.
+     *                 Listener will need to capture 'verifier' query parameter.
      *                 isAuthorizing is set to true when this method is called.
      * @return Token secret string
      * @throws OAuthCommunicationException

@@ -1,5 +1,6 @@
 apply plugin: 'java'
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
 
 sourceCompatibility = 1.5
 
@@ -19,20 +20,56 @@ jar {
     }
 }
 
-task writeNewPom << {
-    pom {
-        project {
-            inceptionYear '2014'
-            licenses {
-                license {
-                    name 'MIT'
-                    url 'http://opensource.org/licenses/MIT'
-                    distribution 'repo'
-                }
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId 'org.paperbackswap'
+            artifactId 'pbs-api-client'
+            version '1.2.1'
+
+            from components.java
+
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('name', 'API Client/SDK for Paperbackswap.com')
+                root.appendNode('description', 'Provides OAuth, URLs, and deserialization of PBS API')
+                root.appendNode('url', 'https://github.com/jasonh-n-austin/pbs-api-client')
+                root.appendNode('inceptionYear', '2014')
+                def scm = root.appendNode('scm')
+                scm.appendNode('url', 'https://github.com/jasonh-n-austin/pbs-api-client')
+                scm.appendNode('connection', 'scm:https://jasharmon@github.com/jasonh-n-austin/pbs-api-client.git')
+                scm.appendNode('developerConnection', 'scm:git://github.com/jasonh-n-austin/pbs-api-client.git')
+                def license = root.appendNode('licenses').appendNode('license')
+                license.appendNode('name', 'The MIT License (MIT)')
+                license.appendNode('url', 'http://www.opensource.org/licenses/mit-license.php')
+                license.appendNode('distribution', 'repo')
+                def developer = root.appendNode('developers').appendNode('developer')
+                developer.appendNode('id', 'jasonh-n-austin')
+                developer.appendNode('name', 'Jason Harmon')
+                developer.appendNode('email', 'jason.harmon@gmail.com')
             }
         }
-    }.writeTo("$buildDir/pom.xml")
+    }
 }
+
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
