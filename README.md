@@ -1,4 +1,4 @@
-pbs-api-client v1.1
+pbs-api-client v1.2
 ==============
 
 API client/SDK for Paperbackswap.com
