@@ -1,16 +1,17 @@
 ![alt text](pbs_dev_logo.jpg "PBS Developers") 
 # API client/SDK for Paperbackswap.com
 
-* Built as a standalone Java 1.5+ library, usable in Android.
-* Builds with Gradle.
-* Uses fluent syntax wherever possible (perhaps at a slight loss of efficiency as mikaelhg's UrlBuilder is final)
+- Built as a standalone Java 1.5+ library, usable in Android.
+- Builds with Gradle.
+- Uses fluent syntax wherever possible (perhaps at a slight loss of efficiency as mikaelhg's UrlBuilder is final)
 
 **Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
 
 - [Common Usage](#user-content-common-usage)
+    - [OAuth 1.0a](#oauth-10a)
+        - [Do the OAuth 1.0a dance](#user-content-do-the-oauth-10a-dance)
+        - [Sign the request with saved token/secret](#user-content-sign-the-request-with-saved-tokensecret)
 	- [Build URLs](#user-content-build-urls)
-		- [Do the OAuth 1.0a dance](#user-content-do-the-oauth-10a-dance)
-		- [Sign the request with saved token/secret](#user-content-sign-the-request-with-saved-tokensecret)
 		- [Build a URL from the know list](#user-content-build-a-url-from-the-know-list)
 		- [Build a URL from a string](#user-content-build-a-url-from-a-string)
 		- [Explicitly set a page](#user-content-explicitly-set-a-page)
@@ -24,7 +25,7 @@
 
 # Common Usage
 
-## Build URLs
+## OAuth 1.0a
 
 ### Do the OAuth 1.0a dance
 ```java
@@ -49,6 +50,9 @@ String signedUrl = oauth.signRequest(
     PbsUrlInfo.MEMBER_WISH_LIST.toString()
 );
 ```
+
+## Build URLs
+
 
 ### Build a URL from the know list
 ```java
