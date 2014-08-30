@@ -13,6 +13,7 @@ import oauth.signpost.exception.OAuthMessageSignerException;
 import oauth.signpost.exception.OAuthNotAuthorizedException;
 import org.apache.commons.lang3.StringUtils;
 
+@SuppressWarnings("UnusedDeclaration")
 public class PbsOauth {
     private boolean isAuthorizing;
     private static OAuthConsumer consumer;
@@ -48,7 +49,7 @@ public class PbsOauth {
      * @param callback URI to redirect to when authorization is complete, be sure to have listener configured.
      *                 Listener will need to capture {@link}=oauth.signpost.OAuth.OAUTH_VERIFIER query parameter.
      *                 isAuthorizing is set to true when this method is called.
-     * @return
+     * @return Token secret string
      * @throws OAuthCommunicationException
      * @throws OAuthExpectationFailedException
      * @throws OAuthNotAuthorizedException
@@ -82,41 +83,33 @@ public class PbsOauth {
     /**
      * Checks to see if the user has been authorized to make API calls with the app
      *
-     * @return
+     * @return Determines if all OAuth 1.0 keys are present and isn't currently in OAuth dance
      */
     public boolean isAuthorized() {
-        if (!StringUtils.isBlank(consumer.getToken()) &&
-                !StringUtils.isBlank(consumer.getTokenSecret()) &&
-                !isAuthorizing()) {
-            return true;
-        } else {
-            return false;
-        }
+        return !StringUtils.isBlank(consumer.getToken());
     }
 
     /**
      * Adds OAuth signature query params to URL
      *
      * @param url URL to have OAuth parameters added
-     * @return
+     * @return Uses provided OAuth 1.0a key/token to create fresh OAuth query params
      */
     public static String signRequest(String url) throws OAuthCommunicationException, OAuthExpectationFailedException, OAuthMessageSignerException {
         return consumer.sign(PbsUrlBuilder.fromUrl(url).withoutOAuthQuery().toString());
-        //output = output.replace("www.paperbackswap.com", "www-paperbackswap-com-r7z8ylmap21m.runscope.net");
     }
 
     /**
      * Checks to see if the provided URL has OAuth 1.0a query parameters
-     * @param url
-     * @return
+     * @param url Any URL with OAuth 1.0a query params
+     * @return True if OAuth 1.0a query params are in provided URL
      */
     public static boolean isSigned(String url) {
         UrlBuilder builder = UrlBuilder.fromString(url);
 
         for (String key : PbsOAuthUrl.PARAMETERS) {
-            boolean contains = builder.queryParameters.containsKey(key);
-            if (!contains) {
-                return contains;
+            if (!builder.queryParameters.containsKey(key)) {
+                return false;
             }
         }
 

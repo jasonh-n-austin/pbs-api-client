@@ -21,7 +21,7 @@ import java.util.List;
  * @see com.paperbackswap.Url.PbsUrl
  */
 public class BookListBuilderJson implements BookListBuilder {
-	protected static Injector mInjector;
+	private static Injector mInjector;
 
 	@Inject
 	public BookListBuilderJson() {
@@ -40,7 +40,7 @@ public class BookListBuilderJson implements BookListBuilder {
 	 * @return List of books
 	 * @throws BookListBuilderException
 	 */
-	protected BookList fromResponse(JSONObject response)
+	BookList fromResponse(JSONObject response)
             throws BookListBuilderException, InvalidBookException, InvalidBooksResponseException, BooksResponseHasErrorsException {
 
         JSONObject responseObject = response.optJSONObject("Response");
@@ -63,7 +63,7 @@ public class BookListBuilderJson implements BookListBuilder {
      * @throws InvalidBookException
      * @see com.paperbackswap.data.Book
      */
-    protected List<Book> getListOrSingle(JSONObject responseObject) throws InvalidBooksResponseException, BookListBuilderException, InvalidBookException {
+    List<Book> getListOrSingle(JSONObject responseObject) throws InvalidBooksResponseException, BookListBuilderException, InvalidBookException {
         List<Book> bookList = new ArrayList<Book>();
         JSONArray booksArr = getBooksArray(responseObject);
 
@@ -101,7 +101,7 @@ public class BookListBuilderJson implements BookListBuilder {
      * @throws BookListBuilderException
      * @throws InvalidBooksResponseException
      */
-    protected JSONArray getBooksArray(JSONObject responseObject)
+    JSONArray getBooksArray(JSONObject responseObject)
             throws BookListBuilderException, InvalidBooksResponseException {
         JSONObject books = getBooksObject(responseObject);
         Object book = books.opt("Book");
@@ -116,11 +116,8 @@ public class BookListBuilderJson implements BookListBuilder {
      *
      * @param responseObject Expects "Response" object from API response object
      * @return The "Books" node in the response object
-     * @throws BookListBuilderException
-     * @throws InvalidBooksResponseException
      */
-    protected JSONObject getBooksObject(JSONObject responseObject)
-            throws BookListBuilderException, InvalidBooksResponseException {
+    JSONObject getBooksObject(JSONObject responseObject) {
         return responseObject.optJSONObject("Books");
     }
 
@@ -131,7 +128,7 @@ public class BookListBuilderJson implements BookListBuilder {
      * @throws BookListBuilderException
      * @throws InvalidBooksResponseException
      */
-	protected JSONObject getBookObject(JSONObject responseObject) throws BookListBuilderException, InvalidBooksResponseException {
+    JSONObject getBookObject(JSONObject responseObject) throws BookListBuilderException, InvalidBooksResponseException {
 		JSONObject books = getBooksObject(responseObject);
 		return books.optJSONObject("Book");
 	}
@@ -140,12 +137,9 @@ public class BookListBuilderJson implements BookListBuilder {
      * Retrieves URL for next list of results in paged set, if it exists
      * @param responseObject Expects "Response" object from API response object
      * @return URL for next list of results
-     * @throws BookListBuilderException
-     * @throws InvalidBooksResponseException
-     * @throws BooksResponseHasErrorsException
      * @see com.paperbackswap.Url.PbsUrlBuilder
      */
-	protected PbsUrlBuilder getNextPage(JSONObject responseObject) throws BookListBuilderException, InvalidBooksResponseException, BooksResponseHasErrorsException {
+    PbsUrlBuilder getNextPage(JSONObject responseObject) {
 		PbsUrlBuilder next = null;
 
         if (responseObject.has("ResultsNextSet")) {

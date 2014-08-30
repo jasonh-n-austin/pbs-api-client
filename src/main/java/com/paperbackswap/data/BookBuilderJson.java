@@ -1,9 +1,7 @@
 package com.paperbackswap.data;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import com.google.inject.Inject;
 import com.paperbackswap.exceptions.InvalidBookException;
-import com.paperbackswap.modules.BookModule;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -14,14 +12,14 @@ import java.util.List;
 import java.util.Map;
 
 public class BookBuilderJson implements BookBuilder {
-	private Injector mInjector;
+    private final Book book;
 
-	public BookBuilderJson() {
-		mInjector = Guice.createInjector(new BookModule());
+    @Inject
+	public BookBuilderJson(Book book) {
+        this.book = book;
 	}
 
 	public Book construct(JSONObject source) throws InvalidBookException {
-		Book book = mInjector.getInstance(Book.class);
 		if (source != null) {
             book.setStatus(source.optString("Status"));
             book.setBinding(source.optString("Binding"));
@@ -45,7 +43,7 @@ public class BookBuilderJson implements BookBuilder {
             //TODO: Deal with caching in Android app
             //cacheBook(book);
         } else {
-            throw new InvalidBookException("Unable to process book");
+            throw new InvalidBookException();
         }
 		return book;
 	}
@@ -66,7 +64,8 @@ public class BookBuilderJson implements BookBuilder {
 
     }
 */
-        protected List<String> getAuthors(JSONObject book) {
+
+    List<String> getAuthors(JSONObject book) {
 		List<String> list = new ArrayList<String>();
 		JSONObject authors = book.optJSONObject("Authors");
 
@@ -89,7 +88,7 @@ public class BookBuilderJson implements BookBuilder {
 		return list;
 	}
 
-    protected Map<Book.CoverImageType, String> getCoverImages(JSONObject book) {
+    Map<Book.CoverImageType, String> getCoverImages(JSONObject book) {
 		Map<Book.CoverImageType, String> covers = new HashMap<Book.CoverImageType, String>();
 
 		JSONObject coverImages = book.optJSONObject("CoverImages");
@@ -107,17 +106,15 @@ public class BookBuilderJson implements BookBuilder {
     /**
      * Fixes the fact that PBS API only returns blank/stock image for LargeImage
      * Runs the risk that image will come back empty from image server
-     * @param imageUrl
-     * @return
+     * @param imageUrl URL of image at PBS server
+     * @return Image URL string with path changed to retrieve large image, if it exists
      */
-    protected String getLargeImageFromMedium(String imageUrl) {
-        String ret = imageUrl.toString().
+    String getLargeImageFromMedium(String imageUrl) {
+        return imageUrl.
                 replaceAll("http://c(\\w).pbsstatic.com/m", "http://c$1.pbsstatic.com/l");
-        //Ln.d(String.format("Upgrade image URL: %s", ret));
-        return ret;
     }
 
-	protected int getPublicationYear(JSONObject book) {
+	int getPublicationYear(JSONObject book) {
 		int pubYear = 0;
 		String pubDate = book.optString("PublicationDate");
 		if (!StringUtils.isEmpty(pubDate) && pubDate.length() >= 4) {
@@ -126,7 +123,7 @@ public class BookBuilderJson implements BookBuilder {
 		return pubYear;
 	}
 
-    protected boolean showRating(JSONObject book) {
+    boolean showRating(JSONObject book) {
 		return book.optBoolean("ShowRatings");
 	}
 }

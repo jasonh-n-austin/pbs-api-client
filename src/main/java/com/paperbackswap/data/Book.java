@@ -3,6 +3,7 @@ package com.paperbackswap.data;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("UnusedDeclaration")
 public interface Book {
 
     public abstract String getStatus();
@@ -80,7 +81,7 @@ public interface Book {
     public abstract void setQueueTotal(Integer queueTotal);
 
     public enum CoverImageType {
-        SmallImage, MediumImage, LargeImage;
+        SmallImage, MediumImage, LargeImage
     }
 
 }

@@ -25,9 +25,10 @@ public class PbsUrlBuilder {
 
     /**
      * Used internally to provide efficient fluent operations, as @UrlBuilder is final
-     * @param builder
+     * @param builder UrlBuilder object
+     * @see gumi.builders.UrlBuilder
      */
-    protected PbsUrlBuilder(UrlBuilder builder) {
+    private PbsUrlBuilder(UrlBuilder builder) {
         this.builder = builder;
         this.builder = addHostAndScheme(builder);
         this.builder = this.builder.setParameter(PbsUrlParams.LIMIT.toString(), DEFAULT_LIMIT.toString());
@@ -35,8 +36,8 @@ public class PbsUrlBuilder {
 
     /**
      * Creates a properly formatted URL for the paperbackswap.com API
-     * @param url
-     * @return
+     * @param url A PBS API URL
+     * @return A properly formatted PBS API URL
      */
     public static PbsUrlBuilder fromUrl(String url) {
         UrlBuilder builder = UrlBuilder.fromString(url);
@@ -45,8 +46,8 @@ public class PbsUrlBuilder {
 
     /**
      * Creates a properly formatted URL for the paperbackswap.com API
-     * @param url
-     * @return
+     * @param url A PBS API URL
+     * @return A properly formatted PBS API URL
      */
     public static PbsUrlBuilder fromUrl(URL url) {
         UrlBuilder builder = UrlBuilder.fromUrl(url);
@@ -55,8 +56,8 @@ public class PbsUrlBuilder {
 
     /**
      * Creates a properly formatted URL for the paperbackswap.com API
-     * @param url
-     * @return
+     * @param url A PBS API URL
+     * @return A properly formatted PBS API URL
      */
     public static PbsUrlBuilder fromPath(PbsUrl url) {
         String pathPart = url.getPath();
@@ -94,8 +95,8 @@ public class PbsUrlBuilder {
 
     /**
      * Fills in provided ISBN in URI parameter
-     * @param isbn
-     * @return
+     * @param isbn ISBN number, in string form (to preserve leading 0s)
+     * @return A properly formatted PBS API URL
      */
     public PbsUrlBuilder withIsbn(String isbn) {
         builder = builder.setParameter(PbsUrlParams.ISBN.toString(), isbn);
@@ -103,9 +104,10 @@ public class PbsUrlBuilder {
     }
 
     // Extract the ISBN from an PBS API URL.
+    @SuppressWarnings("UnusedDeclaration")
     public Long extractIsbn() {
 
-        if (builder.queryParameters.containsKey(PbsUrlParams.ISBN)) {
+        if (builder.queryParameters.containsKey(PbsUrlParams.ISBN.toString())) {
             // Get first query param match
             return Long.parseLong(builder.queryParameters.get(
                     PbsUrlParams.ISBN.toString()
@@ -116,9 +118,8 @@ public class PbsUrlBuilder {
 
     /**
      * Strips OAuth 1.0a query parameters from query string
-     * @return
      */
-    protected void removeOauthQuery() {
+    void removeOauthQuery() {
         removeQuerystringItems(PbsOAuthUrl.PARAMETERS);
 /*
         Iterator<String> iterator = builder.queryParameters.keySet().iterator();
@@ -132,12 +133,12 @@ public class PbsUrlBuilder {
 */
     }
 
-    protected UrlBuilder addHostAndScheme(UrlBuilder builder) {
+    UrlBuilder addHostAndScheme(UrlBuilder builder) {
         return addHostAndScheme(builder, Defaults.HOST.toString(),
                 Defaults.SCHEME.toString());
     }
 
-    protected UrlBuilder addHostAndScheme(UrlBuilder builder, String host, String scheme) {
+    UrlBuilder addHostAndScheme(UrlBuilder builder, String host, String scheme) {
         return builder
                 .withHost(host)
                 .withScheme(scheme);
@@ -145,10 +146,9 @@ public class PbsUrlBuilder {
 
     /**
      * Removes a specific set of querystring items
-     * @param excludedItems
-     * @return
+     * @param excludedItems List of query param names to remove
      */
-    protected void removeQuerystringItems(Set<String> excludedItems) {
+    void removeQuerystringItems(Set<String> excludedItems) {
         for (String exclude : excludedItems) {
             if (builder.queryParameters.containsKey(exclude)) {
                 builder = builder.removeParameters(exclude);
