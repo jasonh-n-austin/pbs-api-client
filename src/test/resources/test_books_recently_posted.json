@@ -1,0 +1,93 @@
+{
+    "Response": {
+        "GrandTotalResults": "4",
+        "ResponseTime": "0.034016132354736",
+        "Books": {
+            "Book": [
+                {
+                    "Status": "Transferred / On Hold",
+                    "ISBN-10": "047077018X",
+                    "Rating": "4.0",
+                    "CoverImages": {
+                        "SmallImage": "http://cc.pbsstatic.com/s/84/0184/9780470770184.jpg",
+                        "MediumImage": "http://cc.pbsstatic.com/m/84/0184/9780470770184.jpg",
+                        "LargeImage": "http://a.pbsstatic.com/images/no_cover/no_cover_322_475.png"
+                    },
+                    "BookDetailsLink": "http://www.paperbackswap.com/Android-Application-Development-Donn-Felker/book/047077018X/&_ads=widget&m=referral&c=API&k=",
+                    "BuyItNew": "http://www.amazon.com/gp/product/047077018X?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=047077018X",
+                    "PostedDate": "7/13/2013 11:52.49 AM ET",
+                    "Authors": {
+                        "Author": "Donn Felker"
+                    },
+                    "ISBN-13": "9780470770184",
+                    "Binding": "Paperback",
+                    "PostedDateTimeStamp": "1373730769",
+                    "Title": "Android Application Development For Dummies<sup>?</sup> (For Dummies (Computer/Tech))"
+                },
+                {
+                    "Status": "Request Of Wish List",
+                    "ISBN-10": "1570671036",
+                    "Rating": "4.0",
+                    "CoverImages": {
+                        "SmallImage": "http://cd.pbsstatic.com/s/36/1036/9781570671036.jpg",
+                        "MediumImage": "http://cd.pbsstatic.com/m/36/1036/9781570671036.jpg",
+                        "LargeImage": "http://a.pbsstatic.com/images/no_cover/no_cover_322_475.png"
+                    },
+                    "BookDetailsLink": "http://www.paperbackswap.com/Becoming-Vegan-Complete-Guide-Adopting/book/1570671036/&_ads=widget&m=referral&c=API&k=",
+                    "BuyItNew": "http://www.amazon.com/gp/product/1570671036?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=1570671036",
+                    "PostedDate": "8/29/2014 1:06.53 AM ET",
+                    "Authors": {
+                        "Author": [
+                            "Vesanto Melina",
+                            "Brenda Davis"
+                        ]
+                    },
+                    "ISBN-13": "9781570671036",
+                    "Binding": "Paperback",
+                    "PostedDateTimeStamp": "1409288813",
+                    "Title": "Becoming Vegan: The Complete Guide to Adopting a Healthy Plant-Based Diet"
+                },
+                {
+                    "Status": "Transferred / On Hold",
+                    "ISBN-10": "1930604394",
+                    "Rating": "4.0",
+                    "CoverImages": {
+                        "SmallImage": "http://ca.pbsstatic.com/s/91/4391/9781930604391.jpg",
+                        "MediumImage": "http://ca.pbsstatic.com/m/91/4391/9781930604391.jpg",
+                        "LargeImage": "http://a.pbsstatic.com/images/no_cover/no_cover_322_475.png"
+                    },
+                    "BookDetailsLink": "http://www.paperbackswap.com/Dale-Grooms-Texas-Dale-Groom/book/1930604394/&_ads=widget&m=referral&c=API&k=",
+                    "BuyItNew": "http://www.amazon.com/gp/product/1930604394?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=1930604394",
+                    "PostedDate": "1/11/2013 11:06.21 AM ET",
+                    "Authors": {
+                        "Author": "Dale Groom"
+                    },
+                    "ISBN-13": "9781930604391",
+                    "Binding": "Paperback",
+                    "PostedDateTimeStamp": "1357920381",
+                    "Title": "Dale Groom's Texas Gardening Guide - Revised Edition"
+                },
+                {
+                    "Status": "Active",
+                    "ISBN-10": "0756629942",
+                    "Rating": "0.0",
+                    "CoverImages": {
+                        "SmallImage": "http://cd.pbsstatic.com/s/46/9946/9780756629946.jpg",
+                        "MediumImage": "http://cd.pbsstatic.com/m/46/9946/9780756629946.jpg",
+                        "LargeImage": "http://a.pbsstatic.com/images/no_cover/no_cover_322_475.png"
+                    },
+                    "BookDetailsLink": "http://www.paperbackswap.com/Dinosaurs-DK-Publishing/book/0756629942/&_ads=widget&m=referral&c=API&k=",
+                    "BuyItNew": "http://www.amazon.com/gp/product/0756629942?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0756629942",
+                    "PostedDate": "7/14/2013 12:17.22 PM ET",
+                    "Authors": {
+                        "Author": "DK Publishing"
+                    },
+                    "ISBN-13": "9780756629946",
+                    "Binding": "Hardcover",
+                    "PostedDateTimeStamp": "1373818642",
+                    "Title": "Dinosaurs!"
+                }
+            ]
+        }
+    }
+}

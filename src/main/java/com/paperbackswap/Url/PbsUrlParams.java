@@ -11,5 +11,10 @@ public enum PbsUrlParams {
         public String toString() {
             return "Limit";
         }
+    },
+    KEYWORD {
+        public String toString() {
+            return "Keyword";
+        }
     }
 }

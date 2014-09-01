@@ -42,10 +42,12 @@ public class BookListBuilderJson implements BookListBuilder {
 	 */
 	BookList fromResponse(JSONObject response)
             throws BookListBuilderException, InvalidBookException, InvalidBooksResponseException, BooksResponseHasErrorsException {
-
+        if (response == null) {
+            throw new InvalidBooksResponseException("Response object was invalid");
+        }
         JSONObject responseObject = response.optJSONObject("Response");
         if (responseObject == null) {
-            throw new InvalidBooksResponseException("Response object was invalid");
+            throw new InvalidBooksResponseException("Response object did not contain 'Response' element");
         }
         if (responseObject.has("error")) {
             throw new BooksResponseHasErrorsException(String.format("Error:%s", responseObject.getString("error")));

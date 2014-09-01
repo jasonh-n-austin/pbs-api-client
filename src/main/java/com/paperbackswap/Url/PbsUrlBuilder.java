@@ -103,6 +103,16 @@ public class PbsUrlBuilder {
         return this;
     }
 
+    /**
+     * Fills in provided keyword in URI parameter
+     * @param keyword Keyword search phrase
+     * @return A properly formatted PBS URL
+     */
+    public PbsUrlBuilder withKeyword(String keyword) {
+        builder = builder.setParameter(PbsUrlParams.KEYWORD.toString(), keyword);
+        return this;
+    }
+
     // Extract the ISBN from an PBS API URL.
     @SuppressWarnings("UnusedDeclaration")
     public Long extractIsbn() {
