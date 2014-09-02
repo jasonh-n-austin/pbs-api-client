@@ -1,13 +1,16 @@
 package com.paperbackswap.data;
 
+import com.cedarsoftware.util.io.JsonReader;
+import com.cedarsoftware.util.io.JsonWriter;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.List;
 import java.util.Map;
 
-
 public class BookImpl implements Book, Serializable {
+    private static final long serialVersionUID = 7526471155622776147L;
+
 	public BookImpl() {}
 
     private String status;
@@ -183,4 +186,9 @@ public class BookImpl implements Book, Serializable {
 	public void setAvailable(boolean available) {
 		this.available = available;
 	}
+
+    @Override
+    public String toJson() throws IOException {
+        return JsonWriter.objectToJson(this);
+    }
 }

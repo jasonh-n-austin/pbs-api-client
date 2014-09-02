@@ -1,5 +1,10 @@
 package com.paperbackswap.data;
 
+import com.cedarsoftware.util.io.JsonReader;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -84,4 +89,5 @@ public interface Book {
         SmallImage, MediumImage, LargeImage
     }
 
+    public String toJson() throws IOException;
 }
