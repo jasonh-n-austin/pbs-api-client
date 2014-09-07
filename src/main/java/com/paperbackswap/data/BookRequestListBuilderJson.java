@@ -11,12 +11,12 @@ import java.util.List;
 /**
  * Generates a list of requests from PBS v2 API RequestType=Requests
  */
-public class BookRequestsBuilderJson implements BookRequestsBuilder {
+public class BookRequestListBuilderJson implements BookRequestListBuilder {
     private static Injector mInjector;
     private BookResponseHandler responseHandler;
 
     @Inject
-    public BookRequestsBuilderJson() {
+    public BookRequestListBuilderJson() {
         mInjector = Guice.createInjector(new BookModule());
     }
 

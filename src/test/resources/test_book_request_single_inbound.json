@@ -1,0 +1,23 @@
+{
+    "Response": {
+        "APIVersion": "1.0",
+        "RequestType": "Requests",
+        "ResponseID": "bFZjWm1kNFdJZXM9",
+        "Request": {
+           "@attributes": {
+               "ID": "TUEzMnZURWJmVE09"
+           },
+           "Status": "Accepted/Printing",
+           "MailDeadline": "2014-09-12 23:00:00",
+           "Books": {
+               "Book": {
+                   "ISBN": "9780060932534",
+                   "Title": "The Secret War Against Hanoi : The Untold Story of Spies, Saboteurs, and Covert Warriors in North Vietnam",
+                   "Author": "Richard H. Shultz Jr."
+               }
+           },
+           "Direction": "Incoming",
+           "Destination": "BRIARCLIFF,TX"
+       }
+    }
+}

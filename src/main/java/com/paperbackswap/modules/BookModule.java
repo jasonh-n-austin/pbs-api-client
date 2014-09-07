@@ -9,7 +9,7 @@ public class BookModule extends AbstractModule {
 		bind(BookBuilder.class).to(BookBuilderJson.class);
 		bind(BookListBuilder.class).to(BookListBuilderJson.class);
         bind(BookRequestBuilder.class).to(BookRequestBuilderJson.class);
-        bind(BookRequestsBuilder.class).to(BookRequestsBuilderJson.class);
+        bind(BookRequestListBuilder.class).to(BookRequestListBuilderJson.class);
 		bind(Book.class).to(BookImpl.class);
         bind(BookRequest.class).to(BookRequestImpl.class);
         bind(BookResponseHandler.class).to(BookResponseHandlerJson.class);

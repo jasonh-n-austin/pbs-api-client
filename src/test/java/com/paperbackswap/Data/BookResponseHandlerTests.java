@@ -5,6 +5,7 @@ import com.paperbackswap.Test.GuiceJUnitRunner;
 import com.paperbackswap.Test.TestDataLoader;
 import com.paperbackswap.data.Book;
 import com.paperbackswap.data.BookRequest;
+import com.paperbackswap.data.BookRequestDirection;
 import com.paperbackswap.data.BookResponseHandler;
 import com.paperbackswap.exceptions.*;
 import com.paperbackswap.modules.BookModule;
@@ -55,9 +56,9 @@ public class BookResponseHandlerTests {
     }
 
     @Test
-    public void loads_single_book_request() throws IOException, InvalidBooksResponseException, BooksResponseHasErrorsException,
+    public void loads_single_book_request_outbound() throws IOException, InvalidBooksResponseException, BooksResponseHasErrorsException,
             InvalidBookException, BookListBuilderException, InvalidBookRequestException {
-        final String testBooksFile = "test_book_request_single.json";
+        final String testBooksFile = "test_book_request_single_outbound.json";
         JSONObject testBooks = TestDataLoader.loadTestFileToJson(testBooksFile);
         assertNotNull(testBooks);
 
@@ -67,6 +68,24 @@ public class BookResponseHandlerTests {
         assertEquals(1, requests.size());
         for (BookRequest request : requests) {
             assertNotNull(request.getId());
+            assertEquals(BookRequestDirection.Outgoing, request.getDirection());
+        }
+    }
+
+    @Test
+    public void loads_single_book_request_inbound() throws IOException, InvalidBooksResponseException, BooksResponseHasErrorsException,
+            InvalidBookException, BookListBuilderException, InvalidBookRequestException {
+        final String testBooksFile = "test_book_request_single_inbound.json";
+        JSONObject testBooks = TestDataLoader.loadTestFileToJson(testBooksFile);
+        assertNotNull(testBooks);
+
+        responseHandler.construct(testBooks);
+        List<BookRequest> requests = responseHandler.getBookRequestList();
+
+        assertEquals(1, requests.size());
+        for (BookRequest request : requests) {
+            assertNotNull(request.getId());
+            assertEquals(BookRequestDirection.Incoming, request.getDirection());
         }
     }
 

@@ -1,7 +1,7 @@
 package com.paperbackswap.data;
 
 public enum BookRequestDirection {
-    Ingoing("Ingoing"),
+    Incoming("Incoming"),
     Outgoing("Outgoing");
 
     String mText;
@@ -10,7 +10,7 @@ public enum BookRequestDirection {
     }
 
     public static BookRequestDirection fromString(String direction) {
-        if (direction.trim().equals(Ingoing.toString())) return Ingoing;
+        if (direction.trim().equals(Incoming.toString())) return Incoming;
         if (direction.trim().equals(Outgoing.toString())) return Outgoing;
         return null;
     }

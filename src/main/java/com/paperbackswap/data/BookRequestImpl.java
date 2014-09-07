@@ -1,8 +1,10 @@
 package com.paperbackswap.data;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class BookRequestImpl implements BookRequest {
+public class BookRequestImpl implements BookRequest, Serializable {
+    private static final long serialVersionUID = 7626471155622776147L;
     private String id;
     private String status;
     private Date mailDeadline;

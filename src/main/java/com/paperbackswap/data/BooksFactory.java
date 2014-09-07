@@ -2,12 +2,11 @@ package com.paperbackswap.data;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.paperbackswap.exceptions.BookListBuilderException;
-import com.paperbackswap.exceptions.BooksResponseHasErrorsException;
-import com.paperbackswap.exceptions.InvalidBookException;
-import com.paperbackswap.exceptions.InvalidBooksResponseException;
+import com.paperbackswap.exceptions.*;
 import com.paperbackswap.modules.BookModule;
 import org.json.JSONObject;
+
+import java.util.List;
 
 @SuppressWarnings("UnusedDeclaration")
 public class BooksFactory {
@@ -23,5 +22,9 @@ public class BooksFactory {
 
     public static BookList getBookList(JSONObject response) throws InvalidBookException, InvalidBooksResponseException, BooksResponseHasErrorsException, BookListBuilderException {
         return mInjector.getInstance(BookListBuilder.class).construct(response);
+    }
+
+    public static List<BookRequest> getBookRequestList(JSONObject response) throws InvalidBookException, InvalidBooksResponseException, BooksResponseHasErrorsException, BookListBuilderException, InvalidBookRequestException {
+        return mInjector.getInstance(BookRequestListBuilder.class).construct(response);
     }
 }
