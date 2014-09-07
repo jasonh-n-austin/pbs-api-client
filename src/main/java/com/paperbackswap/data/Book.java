@@ -1,10 +1,6 @@
 package com.paperbackswap.data;
 
-import com.cedarsoftware.util.io.JsonReader;
-
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +29,11 @@ public interface Book {
 
 	public abstract void setIsbn13(String isbn13);
 
-	public abstract String getImage();
+    public abstract String getIsbn();
+
+    public abstract void setIsbn(String isbn);
+
+    public abstract String getImage();
 
 	public abstract void setImage(String image);
 

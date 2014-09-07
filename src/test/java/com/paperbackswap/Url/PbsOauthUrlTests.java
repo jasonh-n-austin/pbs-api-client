@@ -1,7 +1,5 @@
 package com.paperbackswap.Url;
 
-import com.paperbackswap.Url.Defaults;
-import com.paperbackswap.Url.PbsOAuthUrl;
 import org.junit.Test;
 
 import java.net.URI;

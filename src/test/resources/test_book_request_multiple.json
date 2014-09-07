@@ -1,0 +1,40 @@
+{
+    "Response": {
+        "APIVersion": "1.0",
+        "RequestType": "Requests",
+        "ResponseID": "Z3RSR21OSVRkQms9",
+        "Request": [
+            {
+                "@attributes": {
+                    "ID": "TUEzMnZURWJmVE09"
+                },
+                "Status": "Waiting for Other Member",
+                "Books": {
+                    "Book": {
+                        "ISBN": "9780060932534",
+                        "Title": "The Secret War Against Hanoi : The Untold Story of Spies, Saboteurs, and Covert Warriors in North Vietnam",
+                        "Author": "Richard H. Shultz Jr."
+                    }
+                },
+                "Direction": "Incoming",
+                "Destination": "BRIARCLIFF,TX"
+            },
+            {
+                "@attributes": {
+                    "ID": "bHo0TlpqaURxNk09"
+                },
+                "Status": "Waiting for Other Member",
+                "MailDeadline": "2014-09-08 23:00:00",
+                "Books": {
+                    "Book": {
+                        "ISBN": "9781570671036",
+                        "Title": "Becoming Vegan: The Complete Guide to Adopting a Healthy Plant-Based Diet",
+                        "Author": "Vesanto Melina, Brenda Davis"
+                    }
+                },
+                "Direction": "Outgoing",
+                "Destination": "INWOOD,IA"
+            }
+        ]
+    }
+}

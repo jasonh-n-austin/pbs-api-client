@@ -1,0 +1,16 @@
+{
+    "@attributes": {
+        "ID": "bHo0TlpqaURxNk09"
+    },
+    "Status": "Waiting for Other Member",
+    "MailDeadline": "2014-09-08 23:00:00",
+    "Books": {
+        "Book": {
+            "ISBN": "9781570671036",
+            "Title": "Becoming Vegan: The Complete Guide to Adopting a Healthy Plant-Based Diet",
+            "Author": "Vesanto Melina, Brenda Davis"
+        }
+    },
+    "Direction": "Outgoing",
+    "Destination": "INWOOD,IA"
+}

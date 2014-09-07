@@ -1,6 +1,5 @@
 package com.paperbackswap.Data;
 
-import com.cedarsoftware.util.io.JsonReader;
 import com.cedarsoftware.util.io.JsonWriter;
 import com.google.inject.Inject;
 import com.paperbackswap.Test.GuiceJUnitRunner;
@@ -10,8 +9,7 @@ import com.paperbackswap.modules.BookModule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import javax.sound.midi.Patch;
-import java.io.*;
+import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

@@ -3,6 +3,7 @@ package com.paperbackswap.Data;
 
 import com.google.inject.Inject;
 import com.paperbackswap.Test.GuiceJUnitRunner;
+import com.paperbackswap.Test.TestDataLoader;
 import com.paperbackswap.data.Book;
 import com.paperbackswap.data.BookBuilder;
 import com.paperbackswap.exceptions.BookListBuilderException;
@@ -27,14 +28,10 @@ public class BookBuilderTests {
 
     @Before
     public void setup() throws IOException {
-        final String testBookMultiAuthorFile = "test_book_multi-author.json";
         final String testBookFile = "test_book.json";
-
-        testBookMultiAuthor = TestDataLoader.loadTestFileToJson(testBookMultiAuthorFile);
-        assertNotNull(testBookMultiAuthor);
-
         testBook = TestDataLoader.loadTestFileToJson(testBookFile);
         assertNotNull(testBook);
+
     }
 
     @Inject
@@ -67,7 +64,12 @@ public class BookBuilderTests {
     }
 
     @Test
-    public void builds_book_multi_author() throws InvalidBookException, BookListBuilderException {
+    public void builds_book_multi_author() throws InvalidBookException, BookListBuilderException, IOException {
+        final String testBookMultiAuthorFile = "test_book_multi-author.json";
+
+        testBookMultiAuthor = TestDataLoader.loadTestFileToJson(testBookMultiAuthorFile);
+        assertNotNull(testBookMultiAuthor);
+
         Book book =  bookBuilder.construct(testBookMultiAuthor);
         assertNotNull(book);
         assertEquals(book.getAuthors().size(), 2);

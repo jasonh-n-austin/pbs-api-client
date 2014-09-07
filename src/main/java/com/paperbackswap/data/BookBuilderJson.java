@@ -6,10 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class BookBuilderJson implements BookBuilder {
     private final Book book;
@@ -19,54 +16,86 @@ public class BookBuilderJson implements BookBuilder {
         this.book = book;
 	}
 
-	public Book construct(JSONObject source) throws InvalidBookException {
-		if (source != null) {
-            book.setStatus(source.optString("Status"));
-            book.setBinding(source.optString("Binding"));
-            book.setDescription(source.optString("Description"));
-            book.setImage(getCoverImages(source).get(Book.CoverImageType.LargeImage));
-            book.setIsbn10(source.optString("ISBN-10"));
-            book.setIsbn13(source.optString("ISBN-13"));
-            book.setNumberOfPages(source.optInt("NumberOfPages"));
-            book.setPublished(getPublicationYear(source));
-            book.setPublisher(source.optString("Publisher"));
-            book.setTitle(source.optString("Title"));
-            book.setWishes(source.optInt("Wishes"));
-            book.setAuthors(getAuthors(source));
-            book.setCoverImages(getCoverImages(source));
-            book.setRating((float) source.optDouble("Rating"));
-            book.setShowRatings(showRating(source));
-            book.setAvailable(source.optBoolean("Available"));
-            book.setQueuePosition(source.optInt("WishQueuePosition"));
-            book.setQueueTotal(source.optInt("WishQueueTotal"));
+	public Book construct(Object response) throws InvalidBookException {
+        JSONObject responseJson = null;
+        if (!(response instanceof JSONObject)) {
+            throw new InvalidBookException("Object provided is not a JSONObject");
+        } else {
+            responseJson = (JSONObject) response;
+        }
+
+		if (responseJson != null) {
+            book.setStatus(responseJson.optString("Status"));
+            book.setBinding(responseJson.optString("Binding"));
+            book.setDescription(responseJson.optString("Description"));
+            book.setImage(getCoverImages(responseJson).get(Book.CoverImageType.LargeImage));
+            book.setIsbn10(responseJson.optString("ISBN-10"));
+            book.setIsbn13(responseJson.optString("ISBN-13"));
+            // Only here for alt. formats; defaults to ISBN13 on get
+            book.setIsbn(responseJson.optString("ISBN"));
+            book.setNumberOfPages(responseJson.optInt("NumberOfPages"));
+            book.setPublished(getPublicationYear(responseJson));
+            book.setPublisher(responseJson.optString("Publisher"));
+            book.setTitle(responseJson.optString("Title"));
+            book.setWishes(responseJson.optInt("Wishes"));
+            book.setAuthors(getAuthorsList(responseJson));
+            book.setCoverImages(getCoverImages(responseJson));
+            book.setRating((float) responseJson.optDouble("Rating"));
+            book.setShowRatings(showRating(responseJson));
+            book.setAvailable(responseJson.optBoolean("Available"));
+            book.setQueuePosition(responseJson.optInt("WishQueuePosition"));
+            book.setQueueTotal(responseJson.optInt("WishQueueTotal"));
         } else {
             throw new InvalidBookException();
         }
 		return book;
 	}
 
-    List<String> getAuthors(JSONObject book) {
-		List<String> list = new ArrayList<String>();
+    List<String> getAuthorsList(JSONObject book) {
 		JSONObject authors = book.optJSONObject("Authors");
 
         if (authors != null) {
-            Object authorsObj = authors.opt("Author");
-            if ((authorsObj != null) && (authorsObj instanceof String)) {
-                list.add(authors.optString("Author"));
-            } else {
-                JSONArray authorsArr = authors.optJSONArray("Author");
-                if (authorsArr != null) {
-                    for (int i = 0; i < authorsArr.length(); i++) {
-                        String author = authorsArr.optString(i);
-                        if (author != null) {
-                            list.add(author);
-                        }
+            return getAuthors(authors);
+        } else {
+            return getAuthors(book);
+        }
+	}
+
+    /**
+     * In cases where "Author" is a comma delimited string of authors
+     * @param author A comma delimited string of authors
+     * @return A list of author strings
+     */
+    List<String> getDelimitedAuthors(String author) {
+        List<String> list = new ArrayList<String>();
+        list.addAll(Arrays.asList(author.split(",")));
+        return list;
+    }
+
+    /**
+     *
+     * @param json Authors object
+     * @return a list of author stings
+     */
+    List<String> getAuthors(JSONObject json) {
+        List<String> list = new ArrayList<String>();
+
+        Object authorsObj = json.opt("Author");
+        if ((authorsObj != null) && (authorsObj instanceof String)) {
+            list.addAll(getDelimitedAuthors(json.optString("Author")));
+        } else {
+            JSONArray authorsArr = json.optJSONArray("Author");
+            if (authorsArr != null) {
+                for (int i = 0; i < authorsArr.length(); i++) {
+                    String author = authorsArr.optString(i);
+                    if (author != null) {
+                        list.add(author);
                     }
                 }
             }
         }
-		return list;
-	}
+        return list;
+    }
 
     Map<Book.CoverImageType, String> getCoverImages(JSONObject book) {
 		Map<Book.CoverImageType, String> covers = new HashMap<Book.CoverImageType, String>();

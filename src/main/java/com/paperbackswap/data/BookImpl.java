@@ -1,10 +1,10 @@
 package com.paperbackswap.data;
 
-import com.cedarsoftware.util.io.JsonReader;
 import com.cedarsoftware.util.io.JsonWriter;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +31,27 @@ public class BookImpl implements Book, Serializable {
 	private Map<CoverImageType, String> coverImages;
     private Integer queuePosition;
     private Integer queueTotal;
+
+    public BookImpl(String status, String title, String description, String isbn10, String isbn13, String image, float rating, int published, String publisher, int numberOfPages, int wishes, String binding, boolean showRatings, boolean available, List<String> authors, Map<CoverImageType, String> coverImages, Integer queuePosition, Integer queueTotal) {
+        this.status = status;
+        this.title = title;
+        this.description = description;
+        this.isbn10 = isbn10;
+        this.isbn13 = isbn13;
+        this.image = image;
+        this.rating = rating;
+        this.published = published;
+        this.publisher = publisher;
+        this.numberOfPages = numberOfPages;
+        this.wishes = wishes;
+        this.binding = binding;
+        this.showRatings = showRatings;
+        this.available = available;
+        this.authors = authors;
+        this.coverImages = coverImages;
+        this.queuePosition = queuePosition;
+        this.queueTotal = queueTotal;
+    }
 
     public String getStatus() {
         return status;
@@ -76,7 +97,24 @@ public class BookImpl implements Book, Serializable {
 		this.isbn13 = isbn13;
 	}
 
-	public String getImage() {
+    @Override
+    public String getIsbn() {
+        if (!StringUtils.isEmpty(isbn13)) {
+            return isbn13;
+        } else {
+            return isbn10;
+        }
+    }
+
+    @Override
+    public void setIsbn(String isbn) {
+        if (!StringUtils.isEmpty(isbn)) {
+            if (isbn.length() > 10) isbn13 = isbn;
+            if (isbn.length() <= 10) isbn10 = isbn;
+        }
+    }
+
+    public String getImage() {
 		return image;
 	}
 

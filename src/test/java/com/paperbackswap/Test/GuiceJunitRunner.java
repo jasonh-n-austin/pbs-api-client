@@ -8,6 +8,7 @@ import org.junit.runners.model.InitializationError;
 
 import java.lang.annotation.*;
 
+// From http://fabiostrozzi.eu/2011/03/27/junit-tests-easy-guice/
 public class GuiceJUnitRunner extends BlockJUnit4ClassRunner {
     private Injector injector;
 
