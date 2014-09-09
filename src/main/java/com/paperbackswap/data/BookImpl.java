@@ -31,6 +31,7 @@ public class BookImpl implements Book, Serializable {
 	private Map<CoverImageType, String> coverImages;
     private Integer queuePosition;
     private Integer queueTotal;
+    private String buyItNew;
 
     public BookImpl(String status, String title, String description, String isbn10, String isbn13, String image, float rating, int published, String publisher, int numberOfPages, int wishes, String binding, boolean showRatings, boolean available, List<String> authors, Map<CoverImageType, String> coverImages, Integer queuePosition, Integer queueTotal) {
         this.status = status;
@@ -194,7 +195,17 @@ public class BookImpl implements Book, Serializable {
         this.queueTotal = queueTotal;
     }
 
-	@Override
+    @Override
+    public String getBuyItNew() {
+        return buyItNew;
+    }
+
+    @Override
+    public void setBuyItNew(String link) {
+        this.buyItNew = link;
+    }
+
+    @Override
 	public boolean getShowRatings() {
 		return showRatings;
 	}

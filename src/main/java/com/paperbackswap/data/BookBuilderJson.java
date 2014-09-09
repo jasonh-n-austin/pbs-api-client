@@ -45,6 +45,7 @@ public class BookBuilderJson implements BookBuilder {
             book.setAvailable(responseJson.optBoolean("Available"));
             book.setQueuePosition(responseJson.optInt("WishQueuePosition"));
             book.setQueueTotal(responseJson.optInt("WishQueueTotal"));
+            book.setBuyItNew(responseJson.optString("BuyItNew"));
         } else {
             throw new InvalidBookException();
         }

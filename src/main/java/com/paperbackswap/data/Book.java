@@ -85,6 +85,10 @@ public interface Book {
 
     public abstract void setQueueTotal(Integer queueTotal);
 
+    public abstract String getBuyItNew();
+
+    public abstract void setBuyItNew(String link);
+
     public enum CoverImageType {
         SmallImage, MediumImage, LargeImage
     }
