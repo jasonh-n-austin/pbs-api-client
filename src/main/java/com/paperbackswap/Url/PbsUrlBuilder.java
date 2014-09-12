@@ -103,6 +103,11 @@ public class PbsUrlBuilder {
         return this;
     }
 
+    public PbsUrlBuilder withRequestId(String requestId) {
+        builder = builder.setParameter(PbsUrlParams.REQUEST.toString(), requestId);
+        return this;
+    }
+
     /**
      * Fills in provided keyword in URI parameter
      * @param keyword Keyword search phrase

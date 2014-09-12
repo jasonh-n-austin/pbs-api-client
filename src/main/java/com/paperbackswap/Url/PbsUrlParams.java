@@ -16,5 +16,10 @@ public enum PbsUrlParams {
         public String toString() {
             return "Keyword";
         }
+    },
+    REQUEST {
+        public String toString() {
+            return "RequestID";
+        }
     }
 }

@@ -40,12 +40,18 @@ public class PbsUrlTests {
         assertTrue(builder.toUri().getQuery().contains("ISBN=1234"));
     }
 
-
     @Test
     public void creates_with_isbn_string() {
         builder = PbsUrlBuilder.fromPath(PbsUrl.ISBN_LIST).withIsbn("1234");
         assertNotNull(builder);
         assertTrue(builder.toUri().getQuery().contains("ISBN=1234"));
+    }
+
+    @Test
+    public void creates_with_request_string() {
+        builder = PbsUrlBuilder.fromPath(PbsUrl.MAIL_REQUEST).withRequestId("9876");
+        assertNotNull(builder);
+        assertTrue(builder.toUri().getQuery().contains("RequestID=9876"));
     }
 
     @Test
