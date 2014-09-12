@@ -9,6 +9,7 @@ import com.paperbackswap.modules.BookModule;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.omg.CORBA.Request;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -157,5 +158,9 @@ public class BookResponseHandlerJson
             }
         }
         return bookRequestList;
+    }
+
+    public RequestType getRequestType() {
+        return responseHandler.getResponse().getRequestType();
     }
 }

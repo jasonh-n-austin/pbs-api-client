@@ -6,4 +6,5 @@ import com.paperbackswap.exceptions.InvalidResponseException;
 
 public interface ResponseHandler {
     public PbsResponse construct(Object response) throws ResponseHasErrorsException, InvalidResponseException;
+    public PbsResponse getResponse();
 }

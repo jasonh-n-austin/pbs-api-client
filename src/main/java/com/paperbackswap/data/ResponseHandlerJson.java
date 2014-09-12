@@ -37,10 +37,14 @@ public class ResponseHandlerJson implements ResponseHandler {
             if (responseObject.has("error")) {
                 throw new ResponseHasErrorsException(String.format("Error:%s", responseObject.getString("error")));
             }
-            pbsResponse.setRequestType(RequestType.fromString(responseJson.optString("RequestType")));
+            pbsResponse.setRequestType(RequestType.fromString(responseObject.optString("RequestType")));
             pbsResponse.setResponse(responseObject);
 
             return pbsResponse;
         }
+    }
+
+    public PbsResponse getResponse() {
+        return pbsResponse;
     }
 }

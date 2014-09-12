@@ -5,6 +5,7 @@ import com.paperbackswap.Test.GuiceJUnitRunner;
 import com.paperbackswap.Test.TestDataLoader;
 import com.paperbackswap.data.BookList;
 import com.paperbackswap.data.BookListBuilder;
+import com.paperbackswap.data.RequestType;
 import com.paperbackswap.exceptions.*;
 import com.paperbackswap.modules.BookModule;
 import org.json.JSONObject;
@@ -40,6 +41,18 @@ public class BookListBuilderTests {
         assertNotNull(bookList);
         assertEquals(bookList.size(), 7);
         assertNotNull(bookList.get(0));
+    }
+
+    @Test
+    public void builds_list_has_response_type() throws InvalidBookException, BookListBuilderException, InvalidBooksResponseException, ResponseHasErrorsException, IOException, InvalidResponseException {
+        final String testBooksFile = "test_books.json";
+        testBooks = TestDataLoader.loadTestFileToJson(testBooksFile);
+        assertNotNull(testBooks);
+
+        BookList bookList = bookListBuilder.construct(testBooks);
+        assertNotNull(bookList);
+        assertNotNull(bookList.getRequestType());
+        assertEquals(RequestType.BOOK_SHELF, bookList.getRequestType());
     }
 
     @Test

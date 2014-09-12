@@ -15,4 +15,5 @@ public interface BookResponseHandler {
     public List<BookRequest> getBookRequestList() throws InvalidBookException, InvalidBooksResponseException,
             ResponseHasErrorsException, BookListBuilderException, InvalidBookRequestException;
     public PbsUrlBuilder getNextPage();
+    public RequestType getRequestType();
 }

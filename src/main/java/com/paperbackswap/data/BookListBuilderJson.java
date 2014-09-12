@@ -28,6 +28,6 @@ public class BookListBuilderJson implements BookListBuilder {
         JSONObject responseJson = (JSONObject)response;
         BookResponseHandler handler = mInjector.getInstance(BookResponseHandler.class).construct(responseJson);
 
-        return new BookList(handler.getBookList(), handler.getNextPage());
+        return new BookList(handler.getBookList(), handler.getNextPage(), handler.getRequestType());
 	}
 }

@@ -2,6 +2,7 @@ package com.paperbackswap.data;
 
 import com.cedarsoftware.util.io.JsonReader;
 import com.paperbackswap.Url.PbsUrlBuilder;
+import org.omg.CORBA.Request;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -13,10 +14,12 @@ import java.util.List;
 public class BookList extends ArrayList<Book> {
 	private static final long serialVersionUID = -8227039917486379533L;
 	private final PbsUrlBuilder nextPage;
+    private final RequestType requestType;
 
-	public BookList(List<Book> source, PbsUrlBuilder nextPage) {
+	public BookList(List<Book> source, PbsUrlBuilder nextPage, RequestType requestType) {
 		super(source);
 		this.nextPage = nextPage;
+        this.requestType = requestType;
 	}
 
 	@SuppressWarnings("UnusedDeclaration")
@@ -41,6 +44,10 @@ public class BookList extends ArrayList<Book> {
             Book book = (Book) jr.readObject();
             list.add(book);
         }
-        return new BookList(list, null);
+        return new BookList(list, null, null);
+    }
+
+    public RequestType getRequestType() {
+        return requestType;
     }
 }
