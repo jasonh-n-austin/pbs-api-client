@@ -1,8 +1,8 @@
 package com.paperbackswap.exceptions;
 
-public class BooksResponseHasErrorsException extends Throwable {
+public class ResponseHasErrorsException extends Throwable {
     private static final long serialVersionUID = 1979184620986079304L;
-    public BooksResponseHasErrorsException(String message) {
+    public ResponseHasErrorsException(String message) {
         super(message);
     }
 

@@ -16,15 +16,15 @@ public class BooksFactory {
         mInjector = Guice.createInjector(new BookModule());
     }
 
-    public static Book getBook(JSONObject response) throws InvalidBookException, InvalidBooksResponseException, BookListBuilderException, BooksResponseHasErrorsException {
+    public static Book getBook(JSONObject response) throws InvalidBookException, InvalidBooksResponseException, BookListBuilderException, ResponseHasErrorsException {
         return mInjector.getInstance(BookBuilder.class).construct(response);
     }
 
-    public static BookList getBookList(JSONObject response) throws InvalidBookException, InvalidBooksResponseException, BooksResponseHasErrorsException, BookListBuilderException {
+    public static BookList getBookList(JSONObject response) throws InvalidBookException, InvalidBooksResponseException, ResponseHasErrorsException, BookListBuilderException, InvalidResponseException {
         return mInjector.getInstance(BookListBuilder.class).construct(response);
     }
 
-    public static List<BookRequest> getBookRequestList(JSONObject response) throws InvalidBookException, InvalidBooksResponseException, BooksResponseHasErrorsException, BookListBuilderException, InvalidBookRequestException {
+    public static List<BookRequest> getBookRequestList(JSONObject response) throws InvalidBookException, InvalidBooksResponseException, ResponseHasErrorsException, BookListBuilderException, InvalidBookRequestException, InvalidResponseException {
         return mInjector.getInstance(BookRequestListBuilder.class).construct(response);
     }
 }

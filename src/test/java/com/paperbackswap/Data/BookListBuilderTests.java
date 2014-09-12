@@ -5,10 +5,7 @@ import com.paperbackswap.Test.GuiceJUnitRunner;
 import com.paperbackswap.Test.TestDataLoader;
 import com.paperbackswap.data.BookList;
 import com.paperbackswap.data.BookListBuilder;
-import com.paperbackswap.exceptions.BookListBuilderException;
-import com.paperbackswap.exceptions.BooksResponseHasErrorsException;
-import com.paperbackswap.exceptions.InvalidBookException;
-import com.paperbackswap.exceptions.InvalidBooksResponseException;
+import com.paperbackswap.exceptions.*;
 import com.paperbackswap.modules.BookModule;
 import org.json.JSONObject;
 import org.junit.Test;
@@ -34,7 +31,7 @@ public class BookListBuilderTests {
     }
 
     @Test
-    public void builds_list() throws InvalidBookException, BookListBuilderException, InvalidBooksResponseException, BooksResponseHasErrorsException, IOException {
+    public void builds_list() throws InvalidBookException, BookListBuilderException, InvalidBooksResponseException, ResponseHasErrorsException, IOException, InvalidResponseException {
         final String testBooksFile = "test_books.json";
         testBooks = TestDataLoader.loadTestFileToJson(testBooksFile);
         assertNotNull(testBooks);
@@ -46,7 +43,7 @@ public class BookListBuilderTests {
     }
 
     @Test
-    public void builds_paged_list() throws IOException, InvalidBookException, InvalidBooksResponseException, BooksResponseHasErrorsException, BookListBuilderException {
+    public void builds_paged_list() throws IOException, InvalidBookException, InvalidBooksResponseException, ResponseHasErrorsException, BookListBuilderException, InvalidResponseException {
         final String testBooksPagedFile = "test_books_paged.json";
         testBooksPaged = TestDataLoader.loadTestFileToJson(testBooksPagedFile);
         assertNotNull(testBooksPaged);
@@ -59,7 +56,7 @@ public class BookListBuilderTests {
     }
 
     @Test
-    public void builds_single_as_list() throws InvalidBookException, BookListBuilderException, InvalidBooksResponseException, BooksResponseHasErrorsException, IOException {
+    public void builds_single_as_list() throws InvalidBookException, BookListBuilderException, InvalidBooksResponseException, ResponseHasErrorsException, IOException, InvalidResponseException {
         final String testBookFile = "test_single_book.json";
         testBook = TestDataLoader.loadTestFileToJson(testBookFile);
         assertNotNull(testBook);
@@ -70,13 +67,13 @@ public class BookListBuilderTests {
         assertNotNull(bookList.get(0));
     }
 
-    @Test(expected = InvalidBooksResponseException.class)
-    public void exception_on_bad_response() throws InvalidBookException, BookListBuilderException, InvalidBooksResponseException, BooksResponseHasErrorsException {
-        bookListBuilder.construct(new JSONObject("{}"));
+    @Test(expected = BookListBuilderException.class)
+    public void exception_on_bad_json_response() throws InvalidBookException, InvalidBooksResponseException, ResponseHasErrorsException, BookListBuilderException, InvalidResponseException {
+        bookListBuilder.construct("");
     }
 
-    @Test(expected = BooksResponseHasErrorsException.class)
-    public void response_has_error() throws InvalidBookException, InvalidBooksResponseException, BooksResponseHasErrorsException, BookListBuilderException, IOException {
+    @Test(expected = ResponseHasErrorsException.class)
+    public void response_has_error() throws InvalidBookException, InvalidBooksResponseException, ResponseHasErrorsException, BookListBuilderException, IOException, InvalidResponseException {
         final String testBadResponseFile = "test_book_error.json";
         testBadResponse = TestDataLoader.loadTestFileToJson(testBadResponseFile);
         assertNotNull(testBadResponse);

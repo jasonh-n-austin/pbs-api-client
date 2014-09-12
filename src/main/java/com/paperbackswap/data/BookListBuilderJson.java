@@ -3,10 +3,7 @@ package com.paperbackswap.data;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.paperbackswap.exceptions.BookListBuilderException;
-import com.paperbackswap.exceptions.BooksResponseHasErrorsException;
-import com.paperbackswap.exceptions.InvalidBookException;
-import com.paperbackswap.exceptions.InvalidBooksResponseException;
+import com.paperbackswap.exceptions.*;
 import com.paperbackswap.modules.BookModule;
 import org.json.JSONObject;
 
@@ -24,7 +21,7 @@ public class BookListBuilderJson implements BookListBuilder {
     }
 
 	public BookList construct(Object response)
-            throws BookListBuilderException, InvalidBookException, InvalidBooksResponseException, BooksResponseHasErrorsException {
+            throws BookListBuilderException, InvalidBookException, InvalidBooksResponseException, ResponseHasErrorsException, InvalidResponseException {
         if (!(response instanceof JSONObject)) {
             throw new BookListBuilderException("Object provided is not a JSONObject");
         }

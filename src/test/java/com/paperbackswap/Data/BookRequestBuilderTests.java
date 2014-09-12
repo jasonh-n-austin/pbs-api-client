@@ -31,7 +31,7 @@ public class BookRequestBuilderTests {
     }
 
     @Test
-    public void builds_book() throws IOException, InvalidBookException, InvalidBooksResponseException, BooksResponseHasErrorsException, BookListBuilderException, ParseException, InvalidBookRequestException {
+    public void builds_book() throws IOException, InvalidBookException, InvalidBooksResponseException, ResponseHasErrorsException, BookListBuilderException, ParseException, InvalidBookRequestException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date testDate = sdf.parse("2014-09-08 23:00:00");
 

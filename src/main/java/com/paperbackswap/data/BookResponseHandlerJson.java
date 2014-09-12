@@ -16,13 +16,16 @@ import java.util.List;
 /**
  * Processes base response from PBS API
  */
-public class BookResponseHandlerJson extends BookResponseHandlerBase implements BookResponseHandler {
+public class BookResponseHandlerJson
+        implements BookResponseHandler {
     private static Injector mInjector;
-    RequestType requestType;
+    private JSONObject responseObject;
+    private ResponseHandler responseHandler;
 
     @Inject
-    private BookResponseHandlerJson() {
+    private BookResponseHandlerJson(ResponseHandler responseHandler) {
         mInjector = Guice.createInjector(new BookModule());
+        this.responseHandler = responseHandler;
     }
 
     /**
@@ -30,28 +33,33 @@ public class BookResponseHandlerJson extends BookResponseHandlerBase implements 
      * @param response raw response as JSONObject from PBS API v2
      * @return A new handler for processing response
      * @throws InvalidBooksResponseException
-     * @throws BooksResponseHasErrorsException
+     * @throws com.paperbackswap.exceptions.ResponseHasErrorsException
      */
-    public BookResponseHandler construct(Object response) throws InvalidBooksResponseException, BooksResponseHasErrorsException {
-        JSONObject responseJson = null;
-        if (response == null && !(response instanceof JSONObject)) {
-            throw new InvalidBooksResponseException("Object provided is not a valid JSONObject");
-        } else {
-            responseJson = (JSONObject) response;
-        }
-
-        JSONObject responseObject;
-        try {
-            responseObject = responseJson.getJSONObject("Response");
-        } catch (JSONException e) {
-            throw new InvalidBooksResponseException("Response object did not contain 'Response' element");
-        }
-        if (responseObject.has("error")) {
-            throw new BooksResponseHasErrorsException(String.format("Error:%s", responseObject.getString("error")));
-        }
-        requestType = RequestType.fromString(responseJson.optString("RequestType"));
-        this.responseObject = responseObject;
+    public BookResponseHandler construct(Object response) throws InvalidBooksResponseException, ResponseHasErrorsException, InvalidResponseException {
+        PbsResponse pbsResponse = responseHandler.construct(response);
+        this.responseObject = pbsResponse.getResponse();
         return this;
+    }
+
+    /**
+     *
+     * @return The "Books" node in the response object
+     */
+    protected JSONObject getBooksObject() throws InvalidBooksResponseException {
+        try {
+            return responseObject.getJSONObject("Books");
+        } catch (JSONException e) {
+            throw new InvalidBooksResponseException("Books not found in response");
+        }
+    }
+
+    /**
+     * Retrieves single book from response if no list was provided
+     * @return The "Book" node in the response object
+     */
+    protected JSONObject getSingleBookObject() throws InvalidBooksResponseException {
+        JSONObject books = getBooksObject();
+        return books.optJSONObject("Book");
     }
 
     /**
@@ -124,11 +132,11 @@ public class BookResponseHandlerJson extends BookResponseHandlerBase implements 
      * @return List of book requests
      * @throws InvalidBookException
      * @throws InvalidBooksResponseException
-     * @throws BooksResponseHasErrorsException
+     * @throws com.paperbackswap.exceptions.ResponseHasErrorsException
      * @throws BookListBuilderException
      * @throws InvalidBookRequestException
      */
-    public List<BookRequest> getBookRequestList() throws InvalidBookException, InvalidBooksResponseException, BooksResponseHasErrorsException, BookListBuilderException, InvalidBookRequestException {
+    public List<BookRequest> getBookRequestList() throws InvalidBookException, InvalidBooksResponseException, ResponseHasErrorsException, BookListBuilderException, InvalidBookRequestException {
         List<BookRequest> bookRequestList = new ArrayList<BookRequest>();
         JSONArray list = responseObject.optJSONArray("Request");
         if (list != null) {

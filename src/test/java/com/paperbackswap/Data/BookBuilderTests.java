@@ -31,11 +31,10 @@ public class BookBuilderTests {
         final String testBookFile = "test_book.json";
         testBook = TestDataLoader.loadTestFileToJson(testBookFile);
         assertNotNull(testBook);
-
     }
 
     @Inject
-    public void set_builders(BookBuilder bookBuilder) {
+    public void setBuilders(BookBuilder bookBuilder) {
         this.bookBuilder = bookBuilder;
     }
 

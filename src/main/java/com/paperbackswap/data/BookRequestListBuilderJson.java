@@ -23,7 +23,7 @@ public class BookRequestListBuilderJson implements BookRequestListBuilder {
     @Override
     public List<BookRequest> construct(Object source)
             throws BookListBuilderException, InvalidBookException, InvalidBooksResponseException,
-            BooksResponseHasErrorsException, InvalidBookRequestException {
+            ResponseHasErrorsException, InvalidBookRequestException, InvalidResponseException {
         responseHandler = mInjector.getInstance(BookResponseHandler.class).construct(source);
 
         List<BookRequest> requests = responseHandler.getBookRequestList();

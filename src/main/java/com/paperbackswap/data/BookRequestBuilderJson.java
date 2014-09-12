@@ -31,7 +31,7 @@ public class BookRequestBuilderJson implements BookRequestBuilder {
 
     public BookRequest construct(JSONObject response)
             throws InvalidBookRequestException, InvalidBooksResponseException,
-            BooksResponseHasErrorsException, InvalidBookException, BookListBuilderException {
+            ResponseHasErrorsException, InvalidBookException, BookListBuilderException {
         JSONObject responseJson = null;
         if (!(response instanceof JSONObject)) {
             throw new InvalidBookRequestException("Object provided is not a JSONObject");

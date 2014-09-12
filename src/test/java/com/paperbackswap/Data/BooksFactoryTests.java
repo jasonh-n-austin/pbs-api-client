@@ -4,10 +4,7 @@ import com.paperbackswap.Test.TestDataLoader;
 import com.paperbackswap.data.Book;
 import com.paperbackswap.data.BookList;
 import com.paperbackswap.data.BooksFactory;
-import com.paperbackswap.exceptions.BookListBuilderException;
-import com.paperbackswap.exceptions.BooksResponseHasErrorsException;
-import com.paperbackswap.exceptions.InvalidBookException;
-import com.paperbackswap.exceptions.InvalidBooksResponseException;
+import com.paperbackswap.exceptions.*;
 import org.json.JSONObject;
 import org.junit.Test;
 
@@ -19,7 +16,7 @@ import static org.junit.Assert.assertNotNull;
 public class BooksFactoryTests {
 
     @Test
-    public void creates_book_list() throws InvalidBookException, InvalidBooksResponseException, BooksResponseHasErrorsException, BookListBuilderException, IOException {
+    public void creates_book_list() throws InvalidBookException, InvalidBooksResponseException, ResponseHasErrorsException, BookListBuilderException, IOException, InvalidResponseException {
         final String testBooksFile = "test_books.json";
         JSONObject testBooks = TestDataLoader.loadTestFileToJson(testBooksFile);
         assertNotNull(testBooks);
@@ -29,7 +26,7 @@ public class BooksFactoryTests {
     }
 
     @Test
-    public void creates_book_in_list() throws InvalidBookException, InvalidBooksResponseException, BooksResponseHasErrorsException, BookListBuilderException, IOException {
+    public void creates_book_in_list() throws InvalidBookException, InvalidBooksResponseException, ResponseHasErrorsException, BookListBuilderException, IOException {
         final String testBookFile = "test_book.json";
         JSONObject testBook = TestDataLoader.loadTestFileToJson(testBookFile);
         assertNotNull(testBook);
@@ -40,7 +37,7 @@ public class BooksFactoryTests {
     }
 
     @Test
-    public void creates_recently_posted() throws IOException, InvalidBookException, InvalidBooksResponseException, BooksResponseHasErrorsException, BookListBuilderException {
+    public void creates_recently_posted() throws IOException, InvalidBookException, InvalidBooksResponseException, ResponseHasErrorsException, BookListBuilderException, InvalidResponseException {
         final String testBooksFile = "test_books_recently_posted.json";
         JSONObject testBooks = TestDataLoader.loadTestFileToJson(testBooksFile);
         assertNotNull(testBooks);

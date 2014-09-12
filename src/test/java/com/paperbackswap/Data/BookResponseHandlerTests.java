@@ -30,8 +30,8 @@ public class BookResponseHandlerTests {
     }
 
     @Test
-    public void loads_valid_response() throws IOException, InvalidBooksResponseException, BooksResponseHasErrorsException,
-            InvalidBookException, BookListBuilderException {
+    public void loads_valid_response() throws IOException, InvalidBooksResponseException, ResponseHasErrorsException,
+            InvalidBookException, BookListBuilderException, InvalidResponseException {
         final String testBooksFile = "test_books.json";
         JSONObject testBooks = TestDataLoader.loadTestFileToJson(testBooksFile);
         assertNotNull(testBooks);
@@ -43,8 +43,8 @@ public class BookResponseHandlerTests {
     }
 
     @Test
-    public void loads_books_response() throws IOException, InvalidBooksResponseException, BooksResponseHasErrorsException,
-            InvalidBookException, BookListBuilderException {
+    public void loads_books_response() throws IOException, InvalidBooksResponseException, ResponseHasErrorsException,
+            InvalidBookException, BookListBuilderException, InvalidResponseException {
         final String testBooksFile = "test_books.json";
         JSONObject testBooks = TestDataLoader.loadTestFileToJson(testBooksFile);
         assertNotNull(testBooks);
@@ -56,8 +56,8 @@ public class BookResponseHandlerTests {
     }
 
     @Test
-    public void loads_single_book_request_outbound() throws IOException, InvalidBooksResponseException, BooksResponseHasErrorsException,
-            InvalidBookException, BookListBuilderException, InvalidBookRequestException {
+    public void loads_single_book_request_outbound() throws IOException, InvalidBooksResponseException, ResponseHasErrorsException,
+            InvalidBookException, BookListBuilderException, InvalidBookRequestException, InvalidResponseException {
         final String testBooksFile = "test_book_request_single_outbound.json";
         JSONObject testBooks = TestDataLoader.loadTestFileToJson(testBooksFile);
         assertNotNull(testBooks);
@@ -73,8 +73,8 @@ public class BookResponseHandlerTests {
     }
 
     @Test
-    public void loads_single_book_request_inbound() throws IOException, InvalidBooksResponseException, BooksResponseHasErrorsException,
-            InvalidBookException, BookListBuilderException, InvalidBookRequestException {
+    public void loads_single_book_request_inbound() throws IOException, InvalidBooksResponseException, ResponseHasErrorsException,
+            InvalidBookException, BookListBuilderException, InvalidBookRequestException, InvalidResponseException {
         final String testBooksFile = "test_book_request_single_inbound.json";
         JSONObject testBooks = TestDataLoader.loadTestFileToJson(testBooksFile);
         assertNotNull(testBooks);
@@ -90,8 +90,8 @@ public class BookResponseHandlerTests {
     }
 
     @Test
-    public void loads_book_requests() throws IOException, InvalidBooksResponseException, BooksResponseHasErrorsException,
-            InvalidBookException, BookListBuilderException, InvalidBookRequestException {
+    public void loads_book_requests() throws IOException, InvalidBooksResponseException, ResponseHasErrorsException,
+            InvalidBookException, BookListBuilderException, InvalidBookRequestException, InvalidResponseException {
         final String testBooksFile = "test_book_request_multiple.json";
         JSONObject testBooks = TestDataLoader.loadTestFileToJson(testBooksFile);
         assertNotNull(testBooks);
@@ -106,8 +106,8 @@ public class BookResponseHandlerTests {
     }
 
     @Test
-    public void loads_no_items() throws IOException, InvalidBooksResponseException, BooksResponseHasErrorsException,
-            InvalidBookException, BookListBuilderException, InvalidBookRequestException {
+    public void loads_no_items() throws IOException, InvalidBooksResponseException, ResponseHasErrorsException,
+            InvalidBookException, BookListBuilderException, InvalidBookRequestException, InvalidResponseException {
         final String testBooksFile = "test_requests_no_items.json";
         JSONObject testBooks = TestDataLoader.loadTestFileToJson(testBooksFile);
         assertNotNull(testBooks);
