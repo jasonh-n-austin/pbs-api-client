@@ -10,34 +10,11 @@ import java.util.Set;
  * OAuth 1.0a URLs for PBS API
  */
 @SuppressWarnings("ALL")
-public enum PbsOAuthUrl {
+public class PbsOAuthUrl {
 
-    REQUEST_TOKEN("/api/request_token.php"),
-    AUTHORIZE("/api/authorize.php"),
-    ACCESS_TOKEN ("/api/access_token.php");
-
-    private String path;
-
-    private PbsOAuthUrl(String path) {
-        this.path = path;
-    }
-
-    public String toString() {
-        return UrlBuilder.empty()
-                .withHost(Defaults.HOST.toString())
-                .withScheme(Defaults.SCHEME.toString())
-                .withPath(path)
-                .toString();
-    }
-
-    public URI toUri() {
-        return UrlBuilder.empty()
-                .withHost(Defaults.HOST.toString())
-                .withScheme(Defaults.SCHEME.toString())
-                .withPath(path)
-                .toUri();
-    }
-
+    public static final String REQUEST_TOKEN ="http://www.paperbackswap.com/api/request_token.php";
+    public static final String AUTHORIZE ="http://www.paperbackswap.com/api/authorize.php";
+    public static final String ACCESS_TOKEN = "http://www.paperbackswap.com/api/access_token.php";
 
     /**
      * Provides reference for all OAuth 1.0a parameter names

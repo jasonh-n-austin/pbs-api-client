@@ -1,6 +1,5 @@
 package com.paperbackswap.Oauth;
 
-import com.paperbackswap.Url.PbsOAuthUrl;
 import com.paperbackswap.Url.PbsUrlBuilder;
 import gumi.builders.UrlBuilder;
 import oauth.signpost.OAuthConsumer;
@@ -13,6 +12,8 @@ import oauth.signpost.exception.OAuthMessageSignerException;
 import oauth.signpost.exception.OAuthNotAuthorizedException;
 import org.apache.commons.lang3.StringUtils;
 
+import static com.paperbackswap.Url.PbsOAuthUrl.*;
+
 @SuppressWarnings("UnusedDeclaration")
 public class PbsOauth {
     private boolean isAuthorizing;
@@ -22,9 +23,9 @@ public class PbsOauth {
     public PbsOauth(String apiKey, String apiSecret) {
         consumer = new CommonsHttpOAuthConsumer(apiKey, apiSecret);
         provider = new CommonsHttpOAuthProvider(
-                PbsOAuthUrl.REQUEST_TOKEN.toString(),
-                PbsOAuthUrl.ACCESS_TOKEN.toString(),
-                PbsOAuthUrl.AUTHORIZE.toString());
+                REQUEST_TOKEN,
+                ACCESS_TOKEN,
+                AUTHORIZE);
     }
 
     public PbsOauth(String apiKey, String apiSecret, String token, String secret) {
@@ -42,6 +43,14 @@ public class PbsOauth {
 
     public String getTokenSecret() {
         return consumer.getTokenSecret();
+    }
+
+    public String getRequestTokenUrl() {
+        return provider.getRequestTokenEndpointUrl();
+    }
+
+    public String getAccessTokenUrl() {
+        return provider.getAccessTokenEndpointUrl();
     }
 
     /**
@@ -86,7 +95,9 @@ public class PbsOauth {
      * @return Determines if all OAuth 1.0 keys are present and isn't currently in OAuth dance
      */
     public boolean isAuthorized() {
-        return !StringUtils.isBlank(consumer.getToken());
+        return (!StringUtils.isEmpty(consumer.getToken()) &&
+                !StringUtils.isEmpty(consumer.getTokenSecret())&&
+                !isAuthorizing());
     }
 
     /**
@@ -107,7 +118,7 @@ public class PbsOauth {
     public static boolean isSigned(String url) {
         UrlBuilder builder = UrlBuilder.fromString(url);
 
-        for (String key : PbsOAuthUrl.PARAMETERS) {
+        for (String key : PARAMETERS) {
             if (!builder.queryParameters.containsKey(key)) {
                 return false;
             }
