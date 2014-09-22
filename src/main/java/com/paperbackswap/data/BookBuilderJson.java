@@ -108,7 +108,9 @@ public class BookBuilderJson implements BookBuilder {
 			covers.put(Book.CoverImageType.MediumImage,
 					coverImages.optString("MediumImage"));
 			covers.put(Book.CoverImageType.LargeImage,
-					getLargeImageFromMedium(coverImages.optString("MediumImage")));
+					getLargeImageFromXl(coverImages.optString("LargeImage")));
+            covers.put(Book.CoverImageType.XLargeImage,
+                    coverImages.optString("LargeImage"));
 		}
 		return covers;
 	}
@@ -119,9 +121,9 @@ public class BookBuilderJson implements BookBuilder {
      * @param imageUrl URL of image at PBS server
      * @return Image URL string with path changed to retrieve large image, if it exists
      */
-    String getLargeImageFromMedium(String imageUrl) {
+    String getLargeImageFromXl(String imageUrl) {
         return imageUrl.
-                replaceAll("http://c(\\w).pbsstatic.com/m", "http://c$1.pbsstatic.com/l");
+                replaceAll("http://c(\\w).pbsstatic.com/xl", "http://c$1.pbsstatic.com/l");
     }
 
 	int getPublicationYear(JSONObject book) {

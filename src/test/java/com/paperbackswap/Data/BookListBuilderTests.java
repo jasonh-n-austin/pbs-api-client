@@ -3,6 +3,7 @@ package com.paperbackswap.Data;
 import com.google.inject.Inject;
 import com.paperbackswap.Test.GuiceJUnitRunner;
 import com.paperbackswap.Test.TestDataLoader;
+import com.paperbackswap.data.Book;
 import com.paperbackswap.data.BookList;
 import com.paperbackswap.data.BookListBuilder;
 import com.paperbackswap.data.RequestType;
@@ -77,7 +78,9 @@ public class BookListBuilderTests {
         BookList bookList = bookListBuilder.construct(testBook);
         assertNotNull(bookList);
         assertEquals(bookList.size(), 1);
-        assertNotNull(bookList.get(0));
+        Book book = bookList.get(0);
+        assertNotNull(book);
+        
     }
 
     @Test(expected = BookListBuilderException.class)

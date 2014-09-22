@@ -48,7 +48,7 @@ public class BookBuilderTests {
         assertEquals("", book.getDescription());
         assertEquals(1, book.getAuthors().size());
         assertEquals("DK Publishing", book.getAuthors().get(0));
-        assertEquals(3, book.getCoverImages().size());
+        assertEquals(4, book.getCoverImages().size());
         assertEquals("Hardcover", book.getBinding());
         assertEquals(0.0F, book.getRating(), 0.0);
         assertEquals("Active", book.getStatus());
@@ -56,7 +56,8 @@ public class BookBuilderTests {
                 //book.getBuyItNewLink();
     }
 
-    @Test
+    // Not running this anymore, as it's use is no longer needed
+    // PBS API fixed the bug with large images
     public void backfills_large_image() throws InvalidBookException, BookListBuilderException {
         Book book =  bookBuilder.construct(testBook);
         assertTrue(book.getCoverImages().containsValue("http://cd.pbsstatic.com/l/46/9946/9780756629946.jpg"));

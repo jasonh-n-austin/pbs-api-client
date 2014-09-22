@@ -90,7 +90,7 @@ public interface Book {
     public abstract void setBuyItNew(String link);
 
     public enum CoverImageType {
-        SmallImage, MediumImage, LargeImage
+        SmallImage, MediumImage, LargeImage, XLargeImage
     }
 
     public String toJson() throws IOException;
