@@ -4,13 +4,16 @@ import com.paperbackswap.Url.PbsUrlBuilder;
 import gumi.builders.UrlBuilder;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
+import oauth.signpost.OAuthProviderListener;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 import oauth.signpost.commonshttp.CommonsHttpOAuthProvider;
-import oauth.signpost.exception.OAuthCommunicationException;
-import oauth.signpost.exception.OAuthExpectationFailedException;
-import oauth.signpost.exception.OAuthMessageSignerException;
-import oauth.signpost.exception.OAuthNotAuthorizedException;
+import oauth.signpost.exception.*;
+import oauth.signpost.http.HttpRequest;
+import oauth.signpost.http.HttpResponse;
+import oauth.signpost.signature.*;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.Header;
+import org.apache.http.message.BasicHttpResponse;
 
 import static com.paperbackswap.Url.PbsOAuthUrl.*;
 
@@ -26,6 +29,8 @@ public class PbsOauth {
                 REQUEST_TOKEN,
                 ACCESS_TOKEN,
                 AUTHORIZE);
+        consumer.setSigningStrategy(new AuthorizationHeaderSigningStrategy());
+        consumer.setMessageSigner(new HmacSha1MessageSigner());
     }
 
     public PbsOauth(String apiKey, String apiSecret, String token, String secret) {
@@ -64,11 +69,35 @@ public class PbsOauth {
      * @throws OAuthNotAuthorizedException
      * @throws OAuthMessageSignerException
      */
-    public String getRequestTokenUrl(String callback)
-            throws OAuthCommunicationException, OAuthExpectationFailedException,
-            OAuthNotAuthorizedException, OAuthMessageSignerException {
+    public String getRequestTokenUrl(String callback) throws OAuthException {
         isAuthorizing = true;
-        return provider.retrieveRequestToken(consumer, callback);
+        provider.setListener(new OAuthProviderListener() {
+            @Override
+            public void prepareRequest(HttpRequest request) throws Exception {
+                request.setHeader("User-Agent", "pbs-api-client/1.3");
+            }
+
+            @Override
+            public void prepareSubmission(HttpRequest request) throws Exception {
+                System.out.println(request.getAllHeaders());
+                //request.setRequestUrl("http://www-paperbackswap-com-r7z8ylmap21m.runscope.net/api/request_token.php");
+            }
+
+            @Override
+            public boolean onResponseReceived(HttpRequest request, HttpResponse response) throws Exception {
+                BasicHttpResponse responseObject = ((BasicHttpResponse) response.unwrap());
+                System.out.println("Status: " + responseObject.getStatusLine().getStatusCode());
+//                String body = IOUtils.toString(responseObject.getEntity().getContent());
+//                System.out.println("Body: "+body);
+                Header engineHeader = (Header) responseObject.getHeaders("Engine")[0];
+                System.out.println("Engine: " + engineHeader.getValue());
+                return false;
+            }
+        });
+
+        //return provider.retrieveRequestToken(consumer, callback);
+        return OAuthBackoff.retrieveRequestTokenWithRetry(provider, consumer, callback);
+
     }
 
     /**
@@ -78,9 +107,10 @@ public class PbsOauth {
      *
      * @param verifier Verifier as retrieved from request token URL, as called from getRequestTokenUri method.
      */
-    public void retrieveAccessToken(String verifier) throws OAuthCommunicationException, OAuthExpectationFailedException, OAuthNotAuthorizedException, OAuthMessageSignerException {
+    public void retrieveAccessToken(String verifier) throws OAuthException {
         provider.setOAuth10a(true); //This is SUPER important...won't work without it
-        provider.retrieveAccessToken(consumer, verifier);
+        //provider.retrieveAccessToken(consumer, verifier);
+        provider = OAuthBackoff.retrieveAccessTokenWithRetry(provider, consumer, verifier);
         isAuthorizing = false; // authorization dance is complete
     }
 
