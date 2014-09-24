@@ -10,10 +10,9 @@ import oauth.signpost.commonshttp.CommonsHttpOAuthProvider;
 import oauth.signpost.exception.*;
 import oauth.signpost.http.HttpRequest;
 import oauth.signpost.http.HttpResponse;
-import oauth.signpost.signature.*;
+import oauth.signpost.signature.AuthorizationHeaderSigningStrategy;
+import oauth.signpost.signature.HmacSha1MessageSigner;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.Header;
-import org.apache.http.message.BasicHttpResponse;
 
 import static com.paperbackswap.Url.PbsOAuthUrl.*;
 
@@ -22,6 +21,8 @@ public class PbsOauth {
     private boolean isAuthorizing;
     private static OAuthConsumer consumer;
     private static OAuthProvider provider;
+    private static final String USER_AGENT_HEADER = "User-Agent";
+    private static final String USER_AGENT = "pbs-api-client/1.3";
 
     public PbsOauth(String apiKey, String apiSecret) {
         consumer = new CommonsHttpOAuthConsumer(apiKey, apiSecret);
@@ -74,23 +75,24 @@ public class PbsOauth {
         provider.setListener(new OAuthProviderListener() {
             @Override
             public void prepareRequest(HttpRequest request) throws Exception {
-                request.setHeader("User-Agent", "pbs-api-client/1.3");
+                // Custom user agent
+                request.setHeader(USER_AGENT_HEADER, USER_AGENT);
             }
 
             @Override
             public void prepareSubmission(HttpRequest request) throws Exception {
-                System.out.println(request.getAllHeaders());
+//                System.out.println(request.getAllHeaders());
                 //request.setRequestUrl("http://www-paperbackswap-com-r7z8ylmap21m.runscope.net/api/request_token.php");
             }
 
             @Override
             public boolean onResponseReceived(HttpRequest request, HttpResponse response) throws Exception {
-                BasicHttpResponse responseObject = ((BasicHttpResponse) response.unwrap());
-                System.out.println("Status: " + responseObject.getStatusLine().getStatusCode());
+//                BasicHttpResponse responseObject = ((BasicHttpResponse) response.unwrap());
+//                System.out.println("Status: " + responseObject.getStatusLine().getStatusCode());
 //                String body = IOUtils.toString(responseObject.getEntity().getContent());
 //                System.out.println("Body: "+body);
-                Header engineHeader = (Header) responseObject.getHeaders("Engine")[0];
-                System.out.println("Engine: " + engineHeader.getValue());
+//                Header engineHeader = (Header) responseObject.getHeaders("Engine")[0];
+//                System.out.println("Engine: " + engineHeader.getValue());
                 return false;
             }
         });
@@ -108,6 +110,22 @@ public class PbsOauth {
      * @param verifier Verifier as retrieved from request token URL, as called from getRequestTokenUri method.
      */
     public void retrieveAccessToken(String verifier) throws OAuthException {
+        provider.setListener(new OAuthProviderListener() {
+            @Override
+            public void prepareRequest(HttpRequest request) throws Exception {
+                request.setHeader(USER_AGENT_HEADER, USER_AGENT);
+            }
+
+            @Override
+            public void prepareSubmission(HttpRequest request) throws Exception {
+
+            }
+
+            @Override
+            public boolean onResponseReceived(HttpRequest request, HttpResponse response) throws Exception {
+                return false;
+            }
+        });
         provider.setOAuth10a(true); //This is SUPER important...won't work without it
         //provider.retrieveAccessToken(consumer, verifier);
         provider = OAuthBackoff.retrieveAccessTokenWithRetry(provider, consumer, verifier);
