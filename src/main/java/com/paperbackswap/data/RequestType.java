@@ -8,6 +8,8 @@ public enum RequestType {
     BOOK_SHELF("Bookshelf"),
     CLUB_WISH_LIST("ClubWishList"),
     REQUESTS("Requests"),
+    BOOKS_READ("BooksRead"),
+    ALTERNATE_ADDRESSES("AlternateAddresses"),
     ISBN_LIST("ISBNList"),
     KEYWORD_SEARCH("BookSearch"),
     MEMBER_DATA("MemberData"),

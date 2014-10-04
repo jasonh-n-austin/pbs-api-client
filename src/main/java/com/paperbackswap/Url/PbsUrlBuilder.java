@@ -79,6 +79,11 @@ public class PbsUrlBuilder {
         return this;
     }
 
+    public PbsUrlBuilder withAddress(String addressId) {
+        builder = builder.setParameter(PbsUrlParams.ADDRESS_ID.toString(), addressId);
+        return this;
+    }
+
     public PbsUrlBuilder withoutOAuthQuery() {
         removeOauthQuery();
         return this;

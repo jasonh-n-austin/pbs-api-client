@@ -21,5 +21,10 @@ public enum PbsUrlParams {
         public String toString() {
             return "RequestID";
         }
+    },
+    ADDRESS_ID {
+        public String toString() {
+            return "AddressID";
+        }
     }
 }
