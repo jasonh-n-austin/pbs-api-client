@@ -1,13 +1,23 @@
 package com.paperbackswap.data;
 
+import com.google.gson.annotations.SerializedName;
+
 public class MemberDataImpl implements MemberData {
+    @SerializedName("Name")
     private String name;
+    @SerializedName("CareOf")
     private String careOf;
+    @SerializedName("Street")
     private String streetAddress;
+    @SerializedName("City")
     private String city;
+    @SerializedName("State")
     private String state;
+    @SerializedName("Zip")
     private String zipCode;
-    private Integer credits;
+    @SerializedName("Credits")
+    private int credits;
+    @SerializedName("PBSMoney")
     private String pbsMoney;
 
     @Override
