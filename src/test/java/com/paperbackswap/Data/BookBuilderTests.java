@@ -8,7 +8,9 @@ import com.paperbackswap.data.Book;
 import com.paperbackswap.data.BookBuilder;
 import com.paperbackswap.exceptions.BookListBuilderException;
 import com.paperbackswap.exceptions.InvalidBookException;
+import com.paperbackswap.exceptions.InvalidResponseException;
 import com.paperbackswap.modules.BookModule;
+import com.paperbackswap.modules.BookModuleCache;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +21,7 @@ import java.io.IOException;
 import static org.junit.Assert.*;
 
 @RunWith(GuiceJUnitRunner.class)
-@GuiceJUnitRunner.GuiceModules({ BookModule.class })
+@GuiceJUnitRunner.GuiceModules({ BookModuleCache.class })
 public class BookBuilderTests {
     private JSONObject testBookMultiAuthor;
     private JSONObject testBook;
@@ -28,7 +30,7 @@ public class BookBuilderTests {
 
     @Before
     public void setup() throws IOException {
-        final String testBookFile = "test_book.json";
+        final String testBookFile = "test_book_cache.json";
         testBook = TestDataLoader.loadTestFileToJson(testBookFile);
         assertNotNull(testBook);
     }
@@ -39,33 +41,33 @@ public class BookBuilderTests {
     }
 
     @Test
-    public void builds_book() throws InvalidBookException, BookListBuilderException {
+    public void builds_book() throws InvalidBookException, BookListBuilderException, InvalidResponseException {
         Book book =  bookBuilder.construct(testBook);
         assertNotNull(book);
         assertEquals("9780756629946", book.getIsbn13());
         assertEquals("0756629942", book.getIsbn10());
         assertEquals("Dinosaurs!", book.getTitle());
-        assertEquals("", book.getDescription());
+        assertEquals("Take children on a journey of discovery where stunning images of dinosaurs and sea creatures literally spring from the page. This delightful series features photographic pop-ups that will inspire children to learn more about the natural world.", book.getDescription());
         assertEquals(1, book.getAuthors().size());
         assertEquals("DK Publishing", book.getAuthors().get(0));
         assertEquals(4, book.getCoverImages().size());
         assertEquals("Hardcover", book.getBinding());
         assertEquals(0.0F, book.getRating(), 0.0);
         assertEquals("Active", book.getStatus());
-        //assertEquals("http://www.amazon.com/gp/product/0756629942?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0756629942",
-                //book.getBuyItNewLink();
+        assertEquals("http://www.amazon.com/gp/product/0756629942?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0756629942",
+            book.getBuyItNew());
     }
 
     // Not running this anymore, as it's use is no longer needed
     // PBS API fixed the bug with large images
-    public void backfills_large_image() throws InvalidBookException, BookListBuilderException {
+    public void backfills_large_image() throws InvalidBookException, BookListBuilderException, InvalidResponseException {
         Book book =  bookBuilder.construct(testBook);
         assertTrue(book.getCoverImages().containsValue("http://cd.pbsstatic.com/l/46/9946/9780756629946.jpg"));
     }
 
     @Test
-    public void builds_book_multi_author() throws InvalidBookException, BookListBuilderException, IOException {
-        final String testBookMultiAuthorFile = "test_book_multi-author.json";
+    public void builds_book_multi_author() throws InvalidBookException, BookListBuilderException, IOException, InvalidResponseException {
+        final String testBookMultiAuthorFile = "test_book_multi-author_cache.json";
 
         testBookMultiAuthor = TestDataLoader.loadTestFileToJson(testBookMultiAuthorFile);
         assertNotNull(testBookMultiAuthor);

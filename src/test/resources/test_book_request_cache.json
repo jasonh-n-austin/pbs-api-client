@@ -1,0 +1,14 @@
+{
+    "Status": "Waiting for Other Member",
+    "MailDeadline": "2014-10-24T22:47:38+00:00",
+    "Direction": "Incoming",
+    "Book": {
+        "Authors": [
+            "James L. Swanson"
+        ],
+        "Title": "Manhunt: The 12-Day Chase for Lincoln's Killer (P.S.)",
+        "ISBN": "9780060518509"
+    },
+    "Destination": "BRIARCLIFF,TX",
+    "ID": "bDBPVkRteGxKSXM9"
+}

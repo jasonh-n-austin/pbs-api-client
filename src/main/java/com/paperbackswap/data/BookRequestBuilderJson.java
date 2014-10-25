@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
  * Builds a BookRequest object from PBS API v2 response
  * Object provided should be an individual request, not the array
  */
-public class BookRequestBuilderJson implements BookRequestBuilder {
+public class BookRequestBuilderJson extends JsonBuilderBase implements BookRequestBuilder {
     private static Injector mInjector;
     private final BookRequest bookRequest;
     private final DateFormat dateFormat = new SimpleDateFormat(Defaults.DATE_FORMAT.toString());
@@ -31,13 +31,8 @@ public class BookRequestBuilderJson implements BookRequestBuilder {
 
     public BookRequest construct(JSONObject response)
             throws InvalidBookRequestException, InvalidBooksResponseException,
-            ResponseHasErrorsException, InvalidBookException, BookListBuilderException {
-        JSONObject responseJson = null;
-        if (!(response instanceof JSONObject)) {
-            throw new InvalidBookRequestException("Object provided is not a JSONObject");
-        } else {
-            responseJson = (JSONObject) response;
-        }
+            ResponseHasErrorsException, InvalidBookException, BookListBuilderException, InvalidResponseException {
+        JSONObject responseJson = validateObject(response);
         if (responseJson != null) {
             try {
                 bookRequest.setId(responseJson.getJSONObject("@attributes").optString("ID"));

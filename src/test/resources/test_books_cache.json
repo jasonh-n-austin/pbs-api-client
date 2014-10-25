@@ -1,0 +1,153 @@
+{
+    "TotalCount": "11",
+    "RequestType": "Bookshelf",
+    "Books": [
+        {
+            "Status": "Transferred / On Hold",
+            "Rating": "4.0",
+            "Title": "Android Application Development For Dummies<sup>?</sup> (For Dummies (Computer/Tech))",
+            "PostedDateTimeStamp": "1373730769",
+            "Binding": "Paperback",
+            "_links": [
+                {
+                    "href": "http://www.paperbackswap.com/Android-Application-Development-Donn-Felker/book/047077018X/&_ads=widget&m=referral&c=API&k=",
+                    "rel": "details"
+                },
+                {
+                    "href": "http://www.amazon.com/gp/product/047077018X?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=047077018X",
+                    "rel": "buy"
+                }
+            ],
+            "ISBN-10": "047077018X",
+            "ISBN-13": "9780470770184",
+            "Authors": [
+                "Donn Felker"
+            ],
+            "CoverImages": {
+                "SmallImage": "http://cc.pbsstatic.com/s/84/0184/9780470770184.jpg",
+                "LargeImage": "http://cc.pbsstatic.com/xl/84/0184/9780470770184.jpg",
+                "MediumImage": "http://cc.pbsstatic.com/m/84/0184/9780470770184.jpg"
+            },
+            "PostedDate": "2013-07-13T11:52:49"
+        },
+        {
+            "Status": "Active",
+            "Rating": "3.6",
+            "Title": "Brains That Work A Little Bit Differently: Recent Discoveries About Common Brain Diversities",
+            "PostedDateTimeStamp": "1412045595",
+            "Binding": "Hardcover",
+            "_links": [
+                {
+                    "href": "http://www.paperbackswap.com/Brains-Work-Little-Bit-Differently/book/0760738963/&_ads=widget&m=referral&c=API&k=",
+                    "rel": "details"
+                },
+                {
+                    "href": "http://www.amazon.com/gp/product/0760738963?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0760738963",
+                    "rel": "buy"
+                }
+            ],
+            "ISBN-10": "0760738963",
+            "ISBN-13": "9780760738962",
+            "Authors": [
+                "Allen D. Bragdon",
+                "David Gamon"
+            ],
+            "CoverImages": {
+                "SmallImage": "http://cb.pbsstatic.com/s/62/8962/9780760738962.jpg",
+                "LargeImage": "http://cb.pbsstatic.com/xl/62/8962/9780760738962.jpg",
+                "MediumImage": "http://cb.pbsstatic.com/m/62/8962/9780760738962.jpg"
+            },
+            "PostedDate": "2014-09-29T22:53:15"
+        },
+        {
+            "Status": "Transferred / On Hold",
+            "Rating": "4.0",
+            "Title": "Dale Groom's Texas Gardening Guide - Revised Edition",
+            "PostedDateTimeStamp": "1357920381",
+            "Binding": "Paperback",
+            "_links": [
+                {
+                    "href": "http://www.paperbackswap.com/Dale-Grooms-Texas-Dale-Groom/book/1930604394/&_ads=widget&m=referral&c=API&k=",
+                    "rel": "details"
+                },
+                {
+                    "href": "http://www.amazon.com/gp/product/1930604394?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=1930604394",
+                    "rel": "buy"
+                }
+            ],
+            "ISBN-10": "1930604394",
+            "ISBN-13": "9781930604391",
+            "Authors": [
+                "Dale Groom"
+            ],
+            "CoverImages": {
+                "SmallImage": "http://ca.pbsstatic.com/s/91/4391/9781930604391.jpg",
+                "LargeImage": "http://ca.pbsstatic.com/xl/91/4391/9781930604391.jpg",
+                "MediumImage": "http://ca.pbsstatic.com/m/91/4391/9781930604391.jpg"
+            },
+            "PostedDate": "2013-01-11T11:06:21"
+        },
+        {
+            "Status": "Active",
+            "Rating": "0.0",
+            "Title": "Dinosaurs!",
+            "PostedDateTimeStamp": "1373818642",
+            "Binding": "Hardcover",
+            "_links": [
+                {
+                    "href": "http://www.paperbackswap.com/Dinosaurs-DK-Publishing/book/0756629942/&_ads=widget&m=referral&c=API&k=",
+                    "rel": "details"
+                },
+                {
+                    "href": "http://www.amazon.com/gp/product/0756629942?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0756629942",
+                    "rel": "buy"
+                }
+            ],
+            "ISBN-10": "0756629942",
+            "ISBN-13": "9780756629946",
+            "Authors": [
+                "DK Publishing"
+            ],
+            "CoverImages": {
+                "SmallImage": "http://cd.pbsstatic.com/s/46/9946/9780756629946.jpg",
+                "LargeImage": "http://cd.pbsstatic.com/xl/46/9946/9780756629946.jpg",
+                "MediumImage": "http://cd.pbsstatic.com/m/46/9946/9780756629946.jpg"
+            },
+            "PostedDate": "2013-07-14T12:17:22"
+        },
+        {
+            "Status": "Active",
+            "Rating": "3.9",
+            "Title": "Fudge-A-Mania (Fudge, Bk 4)",
+            "PostedDateTimeStamp": "1410471343",
+            "Binding": "Paperback",
+            "_links": [
+                {
+                    "href": "http://www.paperbackswap.com/Fudge-Mania-Bk-Judy-Blume/book/0440404908/&_ads=widget&m=referral&c=API&k=",
+                    "rel": "details"
+                },
+                {
+                    "href": "http://www.amazon.com/gp/product/0440404908?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0440404908",
+                    "rel": "buy"
+                }
+            ],
+            "ISBN-10": "0440404908",
+            "ISBN-13": "9780440404903",
+            "Authors": [
+                "Judy Blume"
+            ],
+            "CoverImages": {
+                "SmallImage": "http://cb.pbsstatic.com/s/03/4903/9780440404903.jpg",
+                "LargeImage": "http://cb.pbsstatic.com/xl/03/4903/9780440404903.jpg",
+                "MediumImage": "http://cb.pbsstatic.com/m/03/4903/9780440404903.jpg"
+            },
+            "PostedDate": "2014-09-11T17:35:43"
+        }
+    ],
+    "_links": [
+        {
+            "href": "http://pbs-api-cache.notgoodapis.com/v3/books/Bookshelf?Offset=5&Limit=5",
+            "rel": "next"
+        }
+    ]
+}

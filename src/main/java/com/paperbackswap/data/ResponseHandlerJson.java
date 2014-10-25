@@ -1,9 +1,8 @@
 package com.paperbackswap.data;
 
 import com.google.inject.Inject;
-import com.paperbackswap.exceptions.ResponseHasErrorsException;
-import com.paperbackswap.exceptions.InvalidBooksResponseException;
 import com.paperbackswap.exceptions.InvalidResponseException;
+import com.paperbackswap.exceptions.ResponseHasErrorsException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,7 +18,7 @@ public class ResponseHandlerJson implements ResponseHandler {
     }
 
     @Override
-    public PbsResponse construct(Object response) throws ResponseHasErrorsException, InvalidResponseException {
+    public PbsResponse construct(Object response, int statusCode) throws ResponseHasErrorsException, InvalidResponseException {
         {
             JSONObject responseJson = null;
             if (response == null || !(response instanceof JSONObject)) {

@@ -12,7 +12,7 @@ import org.json.JSONObject;
  * Supports list RequestTypes, as well as detail/single book RequestType
  * @see com.paperbackswap.Url.PbsUrl
  */
-public class BookListBuilderJson implements BookListBuilder {
+public class BookListBuilderJson extends JsonBuilderBase implements BookListBuilder {
 	private static Injector mInjector;
 
     @Inject
@@ -20,13 +20,10 @@ public class BookListBuilderJson implements BookListBuilder {
         mInjector = Guice.createInjector(new BookModule());
     }
 
-	public BookList construct(Object response)
-            throws BookListBuilderException, InvalidBookException, InvalidBooksResponseException, ResponseHasErrorsException, InvalidResponseException {
-        if (!(response instanceof JSONObject)) {
-            throw new BookListBuilderException("Object provided is not a JSONObject");
-        }
-        JSONObject responseJson = (JSONObject)response;
-        BookResponseHandler handler = mInjector.getInstance(BookResponseHandler.class).construct(responseJson);
+	public BookList construct(Object response, int statusCode)
+            throws BookListBuilderException, InvalidBooksResponseException, InvalidResponseException, ResponseHasErrorsException, InvalidBookException {
+        JSONObject responseJson = validateObject(response);
+        BookResponseHandler handler = mInjector.getInstance(BookResponseHandler.class).construct(responseJson, statusCode);
 
         return new BookList(handler.getBookList(), handler.getNextPage(), handler.getRequestType());
 	}

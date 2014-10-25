@@ -5,5 +5,5 @@ import com.paperbackswap.exceptions.InvalidResponseException;
 import com.paperbackswap.exceptions.ResponseHasErrorsException;
 
 public interface MemberDataBuilder {
-    public MemberData construct(Object source) throws InvalidMemberDataException, InvalidResponseException, ResponseHasErrorsException;
+    public MemberData construct(Object source, int statusCode) throws InvalidMemberDataException, InvalidResponseException, ResponseHasErrorsException;
 }

@@ -23,7 +23,7 @@ public class MemberDataFactoryTests {
         JSONObject testMember = TestDataLoader.loadTestFileToJson(testMemberData);
         assertNotNull(testMember);
 
-        MemberData memberData = MemberDataFactory.getMemberData(testMember);
+        MemberData memberData = MemberDataFactory.getMemberData(testMember, 200);
         assertEquals("Krendi Harmon", memberData.getName());
         assertEquals("", memberData.getCareOf());
         assertEquals("BRIARCLIFF", memberData.getCity());

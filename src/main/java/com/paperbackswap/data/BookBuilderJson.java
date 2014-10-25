@@ -2,33 +2,38 @@ package com.paperbackswap.data;
 
 import com.google.inject.Inject;
 import com.paperbackswap.exceptions.InvalidBookException;
+import com.paperbackswap.exceptions.InvalidResponseException;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
-public class BookBuilderJson implements BookBuilder {
+public class BookBuilderJson extends JsonBuilderBase implements BookBuilder {
     private final Book book;
+    private final BookCoverBuilder bookCoverBuilder;
 
     @Inject
-	public BookBuilderJson(Book book) {
+	public BookBuilderJson(Book book, BookCoverBuilder bookCoverBuilder) {
         this.book = book;
+        this.bookCoverBuilder = bookCoverBuilder;
 	}
 
-	public Book construct(Object response) throws InvalidBookException {
+	public Book construct(Object response) throws InvalidBookException, InvalidResponseException {
         JSONObject responseJson = null;
-        if (!(response instanceof JSONObject)) {
-            throw new InvalidBookException("Object provided is not a JSONObject");
-        } else {
-            responseJson = (JSONObject) response;
-        }
+        responseJson = validateObject(response);
 
 		if (responseJson != null) {
+            Map<Book.CoverImageType, String> bookCovers = bookCoverBuilder.construct(responseJson);
+            book.setImage(bookCovers.get(Book.CoverImageType.LargeImage));
+            book.setCoverImages(bookCovers);
+
             book.setStatus(responseJson.optString("Status"));
             book.setBinding(responseJson.optString("Binding"));
             book.setDescription(responseJson.optString("Description"));
-            book.setImage(getCoverImages(responseJson).get(Book.CoverImageType.LargeImage));
             book.setIsbn10(responseJson.optString("ISBN-10"));
             book.setIsbn13(responseJson.optString("ISBN-13"));
             // Only here for alt. formats; defaults to ISBN13 on get
@@ -39,7 +44,6 @@ public class BookBuilderJson implements BookBuilder {
             book.setTitle(responseJson.optString("Title"));
             book.setWishes(responseJson.optInt("Wishes"));
             book.setAuthors(getAuthorsList(responseJson));
-            book.setCoverImages(getCoverImages(responseJson));
             book.setRating((float) responseJson.optDouble("Rating"));
             book.setShowRatings(showRating(responseJson));
             book.setAvailable(responseJson.optBoolean("Available"));
@@ -96,34 +100,6 @@ public class BookBuilderJson implements BookBuilder {
             }
         }
         return list;
-    }
-
-    Map<Book.CoverImageType, String> getCoverImages(JSONObject book) {
-		Map<Book.CoverImageType, String> covers = new HashMap<Book.CoverImageType, String>();
-
-		JSONObject coverImages = book.optJSONObject("CoverImages");
-		if (coverImages != null) {
-			covers.put(Book.CoverImageType.SmallImage,
-					coverImages.optString("SmallImage"));
-			covers.put(Book.CoverImageType.MediumImage,
-					coverImages.optString("MediumImage"));
-			covers.put(Book.CoverImageType.LargeImage,
-					getLargeImageFromXl(coverImages.optString("LargeImage")));
-            covers.put(Book.CoverImageType.XLargeImage,
-                    coverImages.optString("LargeImage"));
-		}
-		return covers;
-	}
-
-    /**
-     * Fixes the fact that PBS API only returns blank/stock image for LargeImage
-     * Runs the risk that image will come back empty from image server
-     * @param imageUrl URL of image at PBS server
-     * @return Image URL string with path changed to retrieve large image, if it exists
-     */
-    String getLargeImageFromXl(String imageUrl) {
-        return imageUrl.
-                replaceAll("http://c(\\w).pbsstatic.com/xl", "http://c$1.pbsstatic.com/l");
     }
 
 	int getPublicationYear(JSONObject book) {

@@ -1,0 +1,40 @@
+{
+    "Response": {
+        "APIVersion": "1.0",
+        "RequestType": "Requests",
+        "ResponseID": "K0NGN29HekczN2c9",
+        "Request": [
+            {
+                "@attributes": {
+                    "ID": "dDhWMHMzQUZLeFU9"
+                },
+                "Status": "Waiting for Other Member",
+                "MailDeadline": "2014-10-05 23:00:00",
+                "Books": {
+                    "Book": {
+                        "ISBN": "9780871138545",
+                        "Title": "Charlie Wilson's War: The Extraordinary Story of the Largest Covert Operation in History",
+                        "Author": "George Crile"
+                    }
+                },
+                "Direction": "Incoming",
+                "Destination": "BRIARCLIFF,TX"
+            },
+            {
+                "@attributes": {
+                    "ID": "L1JwZkxmV0xuTTg9"
+                },
+                "Status": "Waiting for Other Member",
+                "Books": {
+                    "Book": {
+                        "ISBN": "9780806958316",
+                        "Title": "The Ultimate Scrapbooking Book",
+                        "Author": "Rebecca Carter, Sandi Genovese, Lael C Furgeson, Stephanie F Taylor"
+                    }
+                },
+                "Direction": "Incoming",
+                "Destination": "KERRVILLE,TX"
+            }
+        ]
+    }
+}

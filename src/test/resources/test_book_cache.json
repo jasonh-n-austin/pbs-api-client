@@ -1,0 +1,31 @@
+{
+    "Available": "true",
+    "NumberOfPages": "14",
+    "Status": "Active",
+    "Description": "Take children on a journey of discovery where stunning images of dinosaurs and sea creatures literally spring from the page. This delightful series features photographic pop-ups that will inspire children to learn more about the natural world.",
+    "Publisher": "DK CHILDREN",
+    "Rating": "0.0",
+    "Binding": "Hardcover",
+    "Title": "Dinosaurs!",
+    "_links": [
+        {
+            "href": "http://www.paperbackswap.com/Dinosaurs-DK-Publishing/book/0756629942/&_ads=widget&m=referral&c=API&k=",
+            "rel": "details"
+        },
+        {
+            "href": "http://www.amazon.com/gp/product/0756629942?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0756629942",
+            "rel": "buy"
+        }
+    ],
+    "ISBN-10": "0756629942",
+    "ISBN-13": "9780756629946",
+    "Authors": [
+        "DK Publishing"
+    ],
+    "CoverImages": {
+        "SmallImage": "http://cd.pbsstatic.com/s/46/9946/9780756629946.jpg",
+        "LargeImage": "http://cd.pbsstatic.com/xl/46/9946/9780756629946.jpg",
+        "MediumImage": "http://cd.pbsstatic.com/m/46/9946/9780756629946.jpg"
+    },
+    "PublicationDate": "2007-07-30"
+}

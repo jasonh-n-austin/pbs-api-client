@@ -1,0 +1,18 @@
+{
+    "RequestType": "Requests",
+    "Request": {
+        "@attributes": {
+            "ID": "bDBPVkRteGxKSXM9"
+        },
+        "Status": "In Transit",
+        "Destination": "BRIARCLIFF,TX",
+        "Books": {
+            "Book": {
+                "Title": "Manhunt: The 12-Day Chase for Lincoln's Killer (P.S.)",
+                "ISBN": "9780060518509",
+                "Author": "James L. Swanson"
+            }
+        },
+        "Direction": "Incoming"
+    }
+}

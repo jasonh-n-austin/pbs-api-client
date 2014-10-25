@@ -9,7 +9,6 @@ import com.paperbackswap.modules.BookModule;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.omg.CORBA.Request;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +35,8 @@ public class BookResponseHandlerJson
      * @throws InvalidBooksResponseException
      * @throws com.paperbackswap.exceptions.ResponseHasErrorsException
      */
-    public BookResponseHandler construct(Object response) throws InvalidBooksResponseException, ResponseHasErrorsException, InvalidResponseException {
-        PbsResponse pbsResponse = responseHandler.construct(response);
+    public BookResponseHandler construct(Object response, int statusCode) throws InvalidBooksResponseException, ResponseHasErrorsException, InvalidResponseException {
+        PbsResponse pbsResponse = responseHandler.construct(response, statusCode);
         this.responseObject = pbsResponse.getResponse();
         return this;
     }
@@ -100,7 +99,7 @@ public class BookResponseHandlerJson
      * @throws com.paperbackswap.exceptions.InvalidBookException
      * @see com.paperbackswap.data.Book
      */
-    public List<Book> getBookList() throws InvalidBooksResponseException, BookListBuilderException, InvalidBookException {
+    public List<Book> getBookList() throws InvalidBooksResponseException, BookListBuilderException, InvalidBookException, InvalidResponseException {
         List<Book> bookList = new ArrayList<Book>();
         JSONArray booksArr = getBooksArray();
 
@@ -137,7 +136,7 @@ public class BookResponseHandlerJson
      * @throws BookListBuilderException
      * @throws InvalidBookRequestException
      */
-    public List<BookRequest> getBookRequestList() throws InvalidBookException, InvalidBooksResponseException, ResponseHasErrorsException, BookListBuilderException, InvalidBookRequestException {
+    public List<BookRequest> getBookRequestList() throws InvalidBookException, InvalidBooksResponseException, ResponseHasErrorsException, BookListBuilderException, InvalidBookRequestException, InvalidResponseException {
         List<BookRequest> bookRequestList = new ArrayList<BookRequest>();
         JSONArray list = responseObject.optJSONArray("Request");
         if (list != null) {

@@ -15,5 +15,6 @@ public class BookModule extends AbstractModule {
 		bind(Book.class).to(BookImpl.class);
         bind(BookRequest.class).to(BookRequestImpl.class);
         bind(BookResponseHandler.class).to(BookResponseHandlerJson.class);
+        bind(BookCoverBuilder.class).to(BookCoverBuilderJson.class);
 	}
 }

@@ -8,7 +8,7 @@ import com.paperbackswap.data.BookRequest;
 import com.paperbackswap.data.BookRequestDirection;
 import com.paperbackswap.data.BookResponseHandler;
 import com.paperbackswap.exceptions.*;
-import com.paperbackswap.modules.BookModule;
+import com.paperbackswap.modules.BookModuleCache;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(GuiceJUnitRunner.class)
-@GuiceJUnitRunner.GuiceModules({BookModule.class})
+@GuiceJUnitRunner.GuiceModules({BookModuleCache.class})
 public class BookResponseHandlerTests {
     BookResponseHandler responseHandler;
 
@@ -32,37 +32,37 @@ public class BookResponseHandlerTests {
     @Test
     public void loads_valid_response() throws IOException, InvalidBooksResponseException, ResponseHasErrorsException,
             InvalidBookException, BookListBuilderException, InvalidResponseException {
-        final String testBooksFile = "test_books.json";
+        final String testBooksFile = "test_books_cache.json";
         JSONObject testBooks = TestDataLoader.loadTestFileToJson(testBooksFile);
         assertNotNull(testBooks);
 
-        responseHandler.construct(testBooks);
+        responseHandler.construct(testBooks, 200);
         List<Book> books = responseHandler.getBookList();
         assertNotNull(books);
-        assertEquals(7, books.size());
+        assertEquals(5, books.size());
     }
 
     @Test
     public void loads_books_response() throws IOException, InvalidBooksResponseException, ResponseHasErrorsException,
             InvalidBookException, BookListBuilderException, InvalidResponseException {
-        final String testBooksFile = "test_books.json";
+        final String testBooksFile = "test_books_cache.json";
         JSONObject testBooks = TestDataLoader.loadTestFileToJson(testBooksFile);
         assertNotNull(testBooks);
 
-        responseHandler.construct(testBooks);
+        responseHandler.construct(testBooks, 200);
         List<Book> books = responseHandler.getBookList();
         assertNotNull(books);
-        assertEquals(7, books.size());
+        assertEquals(5, books.size());
     }
 
     @Test
     public void loads_single_book_request_outbound() throws IOException, InvalidBooksResponseException, ResponseHasErrorsException,
             InvalidBookException, BookListBuilderException, InvalidBookRequestException, InvalidResponseException {
-        final String testBooksFile = "test_book_request_single_outbound.json";
+        final String testBooksFile = "test_book_request_single_outbound_cache.json";
         JSONObject testBooks = TestDataLoader.loadTestFileToJson(testBooksFile);
         assertNotNull(testBooks);
 
-        responseHandler.construct(testBooks);
+        responseHandler.construct(testBooks, 200);
         List<BookRequest> requests = responseHandler.getBookRequestList();
 
         assertEquals(1, requests.size());
@@ -75,11 +75,11 @@ public class BookResponseHandlerTests {
     @Test
     public void loads_single_book_request_inbound() throws IOException, InvalidBooksResponseException, ResponseHasErrorsException,
             InvalidBookException, BookListBuilderException, InvalidBookRequestException, InvalidResponseException {
-        final String testBooksFile = "test_book_request_single_inbound.json";
+        final String testBooksFile = "test_book_request_single_inbound_cache.json";
         JSONObject testBooks = TestDataLoader.loadTestFileToJson(testBooksFile);
         assertNotNull(testBooks);
 
-        responseHandler.construct(testBooks);
+        responseHandler.construct(testBooks, 200);
         List<BookRequest> requests = responseHandler.getBookRequestList();
 
         assertEquals(1, requests.size());
@@ -92,11 +92,11 @@ public class BookResponseHandlerTests {
     @Test
     public void loads_book_requests() throws IOException, InvalidBooksResponseException, ResponseHasErrorsException,
             InvalidBookException, BookListBuilderException, InvalidBookRequestException, InvalidResponseException {
-        final String testBooksFile = "test_book_request_multiple.json";
+        final String testBooksFile = "test_book_request_multiple_cache.json";
         JSONObject testBooks = TestDataLoader.loadTestFileToJson(testBooksFile);
         assertNotNull(testBooks);
 
-        responseHandler.construct(testBooks);
+        responseHandler.construct(testBooks, 200);
         List<BookRequest> requests = responseHandler.getBookRequestList();
 
         assertEquals(2, requests.size());
@@ -108,11 +108,11 @@ public class BookResponseHandlerTests {
     @Test
     public void loads_no_items() throws IOException, InvalidBooksResponseException, ResponseHasErrorsException,
             InvalidBookException, BookListBuilderException, InvalidBookRequestException, InvalidResponseException {
-        final String testBooksFile = "test_requests_no_items.json";
+        final String testBooksFile = "test_book_requests_no_items.json";
         JSONObject testBooks = TestDataLoader.loadTestFileToJson(testBooksFile);
         assertNotNull(testBooks);
 
-        responseHandler.construct(testBooks);
+        responseHandler.construct(testBooks, 200);
         List<BookRequest> requests = responseHandler.getBookRequestList();
 
         assertEquals(0, requests.size());

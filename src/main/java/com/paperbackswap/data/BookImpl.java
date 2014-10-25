@@ -1,6 +1,7 @@
 package com.paperbackswap.data;
 
 import com.cedarsoftware.util.io.JsonWriter;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
@@ -13,23 +14,40 @@ public class BookImpl implements Book, Serializable {
 
 	public BookImpl() {}
 
+    @SerializedName("Status")
     private String status;
+    @SerializedName("Title")
 	private String title;
+    @SerializedName("Description")
 	private String description;
+    @SerializedName("ISBN")
+    private String isbn;
+    @SerializedName("ISBN-10")
 	private String isbn10;
+    @SerializedName("ISBN-13")
 	private String isbn13;
 	private String image;
+    @SerializedName("Rating")
 	private float rating;
+    @SerializedName("Published")
 	private int published;
+    @SerializedName("Publisher")
 	private String publisher;
-	private int numberOfPages;
-	private int wishes;
-	private String binding;
-	private boolean showRatings;
-	private boolean available;
-	private List<String> authors;
+    private int numberOfPages;
+    @SerializedName("Wishes")
+    private int wishes;
+    @SerializedName("Binding")
+    private String binding;
+    @SerializedName("ShowRatings")
+    private boolean showRatings;
+    @SerializedName("Available")
+    private boolean available;
+    @SerializedName("Authors")
+    private List<String> authors;
 	private Map<CoverImageType, String> coverImages;
+    @SerializedName("QueuePosition")
     private Integer queuePosition;
+    @SerializedName("QueueTotal")
     private Integer queueTotal;
     private String buyItNew;
 
@@ -100,6 +118,9 @@ public class BookImpl implements Book, Serializable {
 
     @Override
     public String getIsbn() {
+        if (!StringUtils.isEmpty(isbn)) {
+            return isbn;
+        }
         if (!StringUtils.isEmpty(isbn13)) {
             return isbn13;
         } else {
@@ -110,8 +131,9 @@ public class BookImpl implements Book, Serializable {
     @Override
     public void setIsbn(String isbn) {
         if (!StringUtils.isEmpty(isbn)) {
-            if (isbn.length() > 10) isbn13 = isbn;
-            if (isbn.length() <= 10) isbn10 = isbn;
+            this.isbn = isbn;
+            if (isbn.length() > 10) this.isbn13 = isbn;
+            if (isbn.length() <= 10) this.isbn10 = isbn;
         }
     }
 

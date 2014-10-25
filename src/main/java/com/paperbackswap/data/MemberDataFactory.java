@@ -15,7 +15,7 @@ public class MemberDataFactory {
         mInjector = Guice.createInjector(new MemberDataModule());
     }
 
-    public static MemberData getMemberData(JSONObject response) throws InvalidMemberDataException, InvalidResponseException, ResponseHasErrorsException {
-        return mInjector.getInstance(MemberDataBuilder.class).construct(response);
+    public static MemberData getMemberData(JSONObject response, int statusCode) throws InvalidMemberDataException, InvalidResponseException, ResponseHasErrorsException {
+        return mInjector.getInstance(MemberDataBuilder.class).construct(response, statusCode);
     }
 }

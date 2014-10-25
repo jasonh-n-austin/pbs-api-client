@@ -1,16 +1,25 @@
 package com.paperbackswap.data;
 
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class BookRequestImpl implements BookRequest, Serializable {
     private static final long serialVersionUID = 7626471155622776147L;
+    @SerializedName("ID")
     private String id;
+    @SerializedName("Status")
     private String status;
+    @SerializedName("MailDeadline")
     private Date mailDeadline;
+    @SerializedName("Direction")
     private BookRequestDirection direction;
+    @SerializedName("Destination")
     private String destination;
-    private Book book;
+    @SerializedName("Book")
+    private BookImpl book;
 
     @Override
     public String getId() {
@@ -74,7 +83,7 @@ public class BookRequestImpl implements BookRequest, Serializable {
 
     @Override
     public void setBook(Book book) {
-        this.book = book;
+        this.book = (BookImpl)book;
     }
 
 }

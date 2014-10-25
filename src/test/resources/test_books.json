@@ -5,8 +5,8 @@
         "ResponseID": "bDVNcXE3WDl5VW89",
         "Limit": "50",
         "Offset": "0",
-        "GrandTotalResults": "7",
-        "ResultsThisResponse": "7",
+        "GrandTotalResults": "1",
+        "ResultsThisResponse": "5",
         "Books": {
             "Book": [
                 {
@@ -111,49 +111,6 @@
                     "PostedDate": "7/11/2013 3:56.41 PM ET",
                     "Status": "Transferred / On Hold",
                     "BuyItNew": "http://www.amazon.com/gp/product/0810988925?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0810988925"
-                },
-                {
-                    "ISBN-13": "9780385050401",
-                    "ISBN-10": "0385050402",
-                    "BookDetailsLink": "http://www.paperbackswap.com/Odyssey/book/0385050402/&_ads=widget&m=referral&c=API&k=",
-                    "Title": "The Odyssey",
-                    "Authors": {
-                        "Author": [
-                            "Robert Fitzgerald (Translator)",
-                            "Homer"
-                        ]
-                    },
-                    "CoverImages": {
-                        "SmallImage": "http://ca.pbsstatic.com/s/01/0401/9780385050401.jpg",
-                        "MediumImage": "http://ca.pbsstatic.com/m/01/0401/9780385050401.jpg",
-                        "LargeImage": "http://a.pbsstatic.com/images/no_cover/no_cover_322_475.png"
-                    },
-                    "Binding": "Paperback",
-                    "Rating": "3.9",
-                    "PostedDateTimeStamp": "1271807361",
-                    "PostedDate": "4/20/2010 7:49.21 PM ET",
-                    "Status": "Transferred / On Hold",
-                    "BuyItNew": "http://www.amazon.com/gp/product/0385050402?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=0385050402"
-                },
-                {
-                    "ISBN-13": "9781605290096",
-                    "ISBN-10": "1605290092",
-                    "BookDetailsLink": "http://www.paperbackswap.com/Womens-Health-Total-Joanna-Williams/book/1605290092/&_ads=widget&m=referral&c=API&k=",
-                    "Title": "Women's Health Total Fitness Guide 2009",
-                    "Authors": {
-                        "Author": "Joanna Williams"
-                    },
-                    "CoverImages": {
-                        "SmallImage": "http://cd.pbsstatic.com/s/96/0096/9781605290096.jpg",
-                        "MediumImage": "http://cd.pbsstatic.com/m/96/0096/9781605290096.jpg",
-                        "LargeImage": "http://a.pbsstatic.com/images/no_cover/no_cover_322_475.png"
-                    },
-                    "Binding": "Hardcover",
-                    "Rating": "5.0",
-                    "PostedDateTimeStamp": "1373818524",
-                    "PostedDate": "7/14/2013 12:15.24 PM ET",
-                    "Status": "Active",
-                    "BuyItNew": "http://www.amazon.com/gp/product/1605290092?SubscriptionId=0QCHRJVSKG6F3BRGBNG2&tag=paperbackswap-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=1605290092"
                 }
             ]
         },

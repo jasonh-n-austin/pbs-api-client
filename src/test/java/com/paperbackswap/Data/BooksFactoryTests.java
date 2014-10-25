@@ -17,17 +17,17 @@ public class BooksFactoryTests {
 
     @Test
     public void creates_book_list() throws InvalidBookException, InvalidBooksResponseException, ResponseHasErrorsException, BookListBuilderException, IOException, InvalidResponseException {
-        final String testBooksFile = "test_books.json";
+        final String testBooksFile = "test_books_cache.json";
         JSONObject testBooks = TestDataLoader.loadTestFileToJson(testBooksFile);
         assertNotNull(testBooks);
 
-        BookList list = BooksFactory.getBookList(testBooks);
-        assertEquals(7, list.size());
+        BookList list = BooksFactory.getBookList(testBooks, 200);
+        assertEquals(5, list.size());
     }
 
     @Test
-    public void creates_book_in_list() throws InvalidBookException, InvalidBooksResponseException, ResponseHasErrorsException, BookListBuilderException, IOException {
-        final String testBookFile = "test_book.json";
+    public void creates_book_in_list() throws InvalidBookException, InvalidBooksResponseException, ResponseHasErrorsException, BookListBuilderException, IOException, InvalidResponseException {
+        final String testBookFile = "test_book_cache.json";
         JSONObject testBook = TestDataLoader.loadTestFileToJson(testBookFile);
         assertNotNull(testBook);
 
@@ -38,11 +38,11 @@ public class BooksFactoryTests {
 
     @Test
     public void creates_recently_posted() throws IOException, InvalidBookException, InvalidBooksResponseException, ResponseHasErrorsException, BookListBuilderException, InvalidResponseException {
-        final String testBooksFile = "test_books_recently_posted.json";
+        final String testBooksFile = "test_books_recently_posted_cache.json";
         JSONObject testBooks = TestDataLoader.loadTestFileToJson(testBooksFile);
         assertNotNull(testBooks);
 
-        BookList list = BooksFactory.getBookList(testBooks);
-        assertEquals(4, list.size());
+        BookList list = BooksFactory.getBookList(testBooks, 200);
+        assertEquals(5, list.size());
     }
 }

@@ -17,8 +17,8 @@ public class MemberDataBuilderJson implements MemberDataBuilder {
     }
 
     @Override
-    public MemberData construct(Object response) throws InvalidMemberDataException, InvalidResponseException, ResponseHasErrorsException {
-        PbsResponse pbsResponse = responseHandler.construct(response);
+    public MemberData construct(Object response, int statusCode) throws InvalidMemberDataException, InvalidResponseException, ResponseHasErrorsException {
+        PbsResponse pbsResponse = responseHandler.construct(response, statusCode);
         JSONObject responseJson = pbsResponse.getResponse();
 
         if (responseJson != null) {

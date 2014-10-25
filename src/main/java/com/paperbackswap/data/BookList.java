@@ -2,7 +2,6 @@ package com.paperbackswap.data;
 
 import com.cedarsoftware.util.io.JsonReader;
 import com.paperbackswap.Url.PbsUrlBuilder;
-import org.omg.CORBA.Request;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

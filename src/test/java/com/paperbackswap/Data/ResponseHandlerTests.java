@@ -33,7 +33,7 @@ public class ResponseHandlerTests {
         final String testFile = "test_books.json";
         JSONObject testData = TestDataLoader.loadTestFileToJson(testFile);
 
-        PbsResponse pbsResponse = responseHandler.construct(testData);
+        PbsResponse pbsResponse = responseHandler.construct(testData, 200);
         assertNotNull(pbsResponse);
 
         assertTrue(pbsResponse.getResponse() != null);
@@ -45,7 +45,7 @@ public class ResponseHandlerTests {
         final String testFile = "test_member_data.json";
         JSONObject testData = TestDataLoader.loadTestFileToJson(testFile);
 
-        PbsResponse pbsResponse = responseHandler.construct(testData);
+        PbsResponse pbsResponse = responseHandler.construct(testData, 200);
         assertNotNull(pbsResponse);
 
         assertTrue(pbsResponse.getResponse() != null);
@@ -53,11 +53,16 @@ public class ResponseHandlerTests {
 
     @Test(expected = InvalidResponseException.class)
     public void exception_on_bad_response() throws InvalidResponseException, ResponseHasErrorsException {
-        responseHandler.construct(new JSONObject("{}"));
+        responseHandler.construct(new JSONObject("{}"), 200);
+    }
+
+    @Test(expected = InvalidResponseException.class)
+    public void exception_on_bad_status() throws InvalidResponseException, ResponseHasErrorsException {
+        responseHandler.construct(new JSONObject("{}"), 404);
     }
 
     @Test(expected = InvalidResponseException.class)
     public void exception_on_bad_json_response() throws InvalidResponseException, ResponseHasErrorsException {
-        responseHandler.construct("");
+        responseHandler.construct("", 200);
     }
 }
