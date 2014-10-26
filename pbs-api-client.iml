@@ -30,7 +30,6 @@
     <orderEntry type="library" exported="" name="Gradle: guice-2.0-no_aop" level="project" />
     <orderEntry type="library" exported="" name="Gradle: slf4j-api-1.7.7" level="project" />
     <orderEntry type="library" exported="" name="Gradle: gson-2.3" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: joda-time-2.5" level="project" />
   </component>
 </module>
 
