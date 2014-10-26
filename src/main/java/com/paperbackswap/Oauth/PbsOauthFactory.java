@@ -3,11 +3,9 @@ package com.paperbackswap.Oauth;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.paperbackswap.modules.OauthCacheModule;
-import com.paperbackswap.modules.OauthModule;
 
 public class PbsOauthFactory {
     public static Injector mInjector;
-    public PbsOauth pbsOauth;
 
     static {
         mInjector = Guice.createInjector(new OauthCacheModule());
